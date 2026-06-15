@@ -1,10 +1,24 @@
 # PRESENSIGO Website
 
-Website resmi PRESENSIGO dengan frontend responsif dan backend FastAPI.
+Website resmi PRESENSIGO — Solusi Absensi Digital Modern.
 
 Frontend memakai Jinja, CSS lokal, Vanilla JavaScript, GSAP, dan
 ScrollTrigger. Jika CDN GSAP tidak tersedia, website otomatis memakai fallback
 CSS/IntersectionObserver/native scroll.
+
+## 🚀 Live Production
+
+- **Vercel**: [https://presensigo-web.vercel.app](https://presensigo-web.vercel.app)
+- **GitHub**: [https://github.com/rhnvlys/presensigo-web](https://github.com/rhnvlys/presensigo-web)
+
+## Stack
+
+- **Backend**: FastAPI (Python)
+- **Templating**: Jinja2
+- **Styling**: CSS lokal + Tailwind (compiled)
+- **JavaScript**: Vanilla JS
+- **Animation**: GSAP + ScrollTrigger (CDN, with CSS fallback)
+- **Deployment**: Vercel Serverless Python
 
 ## Menjalankan Project
 
@@ -36,11 +50,9 @@ npx --yes tailwindcss@3.4.17 -i .\app\static\css\tailwind-input.css -o .\app\sta
 - `app/data.py`: paket, fitur, galeri, testimoni, dan FAQ.
 - `app/templates/`: template Jinja untuk tujuh halaman.
 - `app/static/`: CSS dan JavaScript.
-- `docs/asset-analysis.md`: analisis aset Google Drive.
-- `docs/bmc-web-mapping.md`: pemetaan model bisnis ke fungsi website.
-- `docs/website-structure.md`: route, endpoint, dan struktur halaman.
-- `docs/animation-plan.md`: timeline motion dan reduced-motion.
-- `docs/implementation-report.md`: laporan implementasi lengkap.
+- `api/index.py`: entrypoint Vercel serverless.
+- `vercel.json`: konfigurasi routing Vercel.
+- `docs/`: dokumentasi teknis project.
 - `assets/concepts/`: konsep visual hasil pengolahan referensi.
 
 ## Endpoint
@@ -50,6 +62,26 @@ npx --yes tailwindcss@3.4.17 -i .\app\static\css\tailwind-input.css -o .\app\sta
 
 Endpoint kontak menerima JSON atau form-urlencoded dengan field `name`,
 `contact`, `message`, dan `organization` opsional.
+
+## Halaman
+
+| Route | Deskripsi |
+|-------|-----------|
+| `/` | Home — landing page lengkap |
+| `/tentang` | Tentang Presensigo |
+| `/layanan` | Paket layanan |
+| `/galeri` | Galeri implementasi |
+| `/testimoni` | Testimoni pengguna |
+| `/faq` | FAQ |
+| `/kontak` | Formulir kontak |
+
+## Deployment
+
+Project di-deploy otomatis ke Vercel Production via GitHub integration.
+Setiap push ke branch `main` memicu deployment baru secara otomatis.
+
+**Entrypoint**: `api/index.py` → mengimpor `app.main:app`
+**Runtime**: `@vercel/python` (Python 3.12)
 
 ## Kontak
 
