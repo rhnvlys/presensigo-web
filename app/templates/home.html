@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+{% block title %}PRESENSIGO | Absensi Digital Akurat dan Profesional{% endblock %}
+{% block content %}
+<section class="hero hero-premium animated-grid section-ambient scan-sweep" aria-labelledby="hero-title">
+  <div class="hero-grid-layer" aria-hidden="true" data-intro="grid"></div>
+  <div class="signal-field" aria-hidden="true">
+    <i class="signal-dot signal-dot-blue js-bg-dot"></i>
+    <i class="signal-dot signal-dot-live js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-1 js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-2 js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-3 js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-4 js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-5 js-bg-dot"></i>
+    <i class="data-particle hero-dot dot-6 js-bg-dot"></i>
+    <i class="bg-signal"></i>
+    <i class="bg-pulse"></i>
+    <i class="floating-shape"></i>
+  </div>
+  <div class="data-stream data-stream-hero" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="ambient-glow js-parallax-blob" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-mustard js-parallax-blob" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-coral js-parallax-blob" aria-hidden="true"></div>
+  <div class="hero-copy js-hero-copy">
+    <h1 class="display display-xl hero-title" id="hero-title">
+      <span class="js-hero-line" data-intro="line-1">Transformasi</span>
+      <span class="js-hero-line" data-intro="line-2">Absensi Digital</span>
+      <span class="accent js-hero-line" data-intro="line-3">Anti-Titip Absen</span>
+    </h1>
+    <p class="lead hero-lead" data-intro="lead">
+      Kelola kehadiran lebih akurat dengan scan QR, validasi GPS real-time,
+      dashboard monitoring, dan laporan otomatis dalam satu sistem yang praktis.
+    </p>
+    <div class="hero-actions js-hero-cta" data-intro="actions">
+      <a class="button-primary button-arrow" href="{{ whatsapp_url }}" target="_blank" rel="noopener">
+        <span>Konsultasi Sekarang</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="button-secondary button-arrow" href="#cara-kerja">
+        <span>Lihat Cara Kerja</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+      </a>
+    </div>
+    <div class="hero-benefits micro" data-intro="proof">
+      <span class="js-hero-chip">QR + GPS Validation</span>
+      <span class="js-hero-chip">Real-time Monitoring</span>
+      <span class="js-hero-chip">Auto Report</span>
+      <span class="js-hero-chip">Anti Titip Absen</span>
+    </div>
+    <p class="hero-support" data-intro="proof">
+      Dirancang untuk perusahaan, sekolah, kampus, instansi, organisasi, dan
+      event yang membutuhkan sistem kehadiran lebih rapi, cepat, dan transparan.
+    </p>
+  </div>
+
+  <div class="hero-visual" aria-label="Simulasi dashboard dan pemindai QR PRESENSIGO">
+    <div class="orbit" data-intro="badge">QR<br>+ GPS</div>
+    <div class="live-monitor-badge" data-intro="badge"><i></i> Live Monitoring</div>
+    <div class="dashboard-shell js-dashboard" data-intro="dashboard" data-dashboard>
+      <div class="dashboard-top">
+        <span>PRESENSIGO / Control Room</span>
+        <span class="dashboard-dots"><i></i><i></i><i></i></span>
+      </div>
+      <div class="dashboard-body">
+        <aside class="dashboard-sidebar">
+          <span>Overview</span><span>Kehadiran</span><span>Lokasi</span><span>Laporan</span><span>Pengaturan</span>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-title">
+            <div><strong>Ringkasan Kehadiran</strong><small>Senin, 15 Juni</small></div>
+            <span class="live-indicator micro"><i></i> Live</span>
+          </div>
+          <div class="status-grid">
+            <div class="status-card"><small>Hadir</small><b><span data-counter="86">86</span>%</b></div>
+            <div class="status-card"><small>Terlambat</small><b><span data-counter="9">9</span>%</b></div>
+            <div class="status-card"><small>Izin</small><b><span data-counter="5">5</span>%</b></div>
+          </div>
+          <div class="chart hero-chart" aria-label="Grafik tren kehadiran">
+            <svg viewBox="0 0 400 120" preserveAspectRatio="none">
+              <path data-chart-path pathLength="1" d="M0 90 C40 80,55 45,95 60 S150 100,190 45 S250 20,285 55 S340 95,400 20"/>
+            </svg>
+          </div>
+          <div class="attendance-list">
+            <div class="attendance-row"><span><i></i> Aulia Rahman</span><span>07:31</span><span>Dalam radius</span></div>
+            <div class="attendance-row"><span><i></i> Sinta Maharani</span><span>07:34</span><span>Dalam radius</span></div>
+            <div class="attendance-row" data-dashboard-update><span><i></i> Fajar Nugraha</span><span data-update-time>07:39</span><span data-update-label>Dalam radius</span><em data-update-badge>Data masuk</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone js-phone is-scanning" data-intro="phone" data-qr-demo data-state="scanning">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <span class="phone-label">Scan QR Absensi</span>
+        <div class="qr-detection">
+          <div class="qr-frame" aria-hidden="true">
+            {% for item in range(25) %}<i></i>{% endfor %}
+          </div>
+          <span class="detection-corner corner-a"></span><span class="detection-corner corner-b"></span>
+          <span class="detection-corner corner-c"></span><span class="detection-corner corner-d"></span>
+          <span class="qr-scan-line"></span>
+        </div>
+        <div class="qr-result">
+          <span class="success-check" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+          </span>
+          <strong data-qr-status aria-live="polite">Memindai QR...</strong>
+          <small data-qr-detail>Arahkan kamera ke kode QR</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {% for repeat in range(2) %}
+      <span>SCAN QR &bull; GPS REAL-TIME &bull; LAPORAN OTOMATIS &bull; ANTI-TITIP ABSEN &bull;</span>
+      <span>SCAN QR &bull; GPS REAL-TIME &bull; LAPORAN OTOMATIS &bull; ANTI-TITIP ABSEN &bull;</span>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="section-shell problem-section animated-grid section-ambient" id="masalah">
+  <div class="signal-field" aria-hidden="true">
+    <i class="data-particle particle-a"></i>
+    <i class="data-particle particle-b"></i>
+    <i class="bg-signal signal-coral"></i>
+  </div>
+  <div class="section-heading" data-reveal>
+    <span class="section-label">Masalah Operasional</span>
+    <h2 class="display display-lg">Masalah Absensi Manual Masih Menghambat Operasional?</h2>
+    <p class="lead">Banyak organisasi masih menghadapi data tidak akurat, rekap memakan waktu, dan risiko titip absen yang sulit dikontrol.</p>
+  </div>
+  <div class="problem-grid" data-reveal-group>
+    {% for item in problems %}
+    <article class="problem-card" data-reveal style="--delay:{{ loop.index0 * 70 }}ms">
+      <div class="problem-index">{{ item.number }}</div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="section-closing" data-reveal>Presensigo menyederhanakan proses tersebut melalui sistem absensi digital yang lebih akurat, praktis, dan mudah dipantau.</p>
+</section>
+
+<section class="benefit-section section-ambient" id="kenapa-presensigo">
+  <div class="data-stream data-stream-benefit" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="benefit-intro" data-reveal>
+    <span class="section-label">Dampak Bisnis</span>
+    <h2 class="display display-lg">Kenapa Harus Presensigo?</h2>
+    <p class="lead">Bukan hanya alat absen digital. Presensigo membantu organisasi membangun proses kehadiran yang lebih disiplin, transparan, dan efisien.</p>
+    <a class="button-dark button-arrow" href="{{ whatsapp_url }}" target="_blank" rel="noopener"><span>Konsultasi Gratis</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="benefit-list" data-reveal-group>
+    {% for item in benefits %}
+    <article class="benefit-row" data-reveal style="--delay:{{ loop.index0 * 60 }}ms">
+      <span class="benefit-number">0{{ loop.index }}</span>
+      <div class="icon-box" aria-hidden="true">
+        {% if item.slug == "gps" %}
+        <svg viewBox="0 0 32 32"><path d="M16 29s9-8 9-17a9 9 0 1 0-18 0c0 9 9 17 9 17Z"/><circle cx="16" cy="12" r="3"/></svg>
+        {% elif item.slug == "report" %}
+        <svg viewBox="0 0 32 32"><path d="M7 3h14l5 5v21H7zM21 3v7h5M11 16h11M11 21h11M11 26h7"/></svg>
+        {% elif item.slug == "dashboard" %}
+        <svg viewBox="0 0 32 32"><path d="M3 4h26v24H3zM3 11h26M10 11v17M14 23l4-5 4 2 4-6"/></svg>
+        {% elif item.slug == "shield" %}
+        <svg viewBox="0 0 32 32"><path d="M16 2 27 6v8c0 8-5 13-11 16C10 27 5 22 5 14V6zM11 16l3 3 7-8"/></svg>
+        {% elif item.slug == "efficiency" %}
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v8l5 3M16 1v4M16 27v4"/></svg>
+        {% else %}
+        <svg viewBox="0 0 32 32"><path d="M4 27h24M7 24V11h18v13M4 11 16 3l12 8M12 15v6M20 15v6"/></svg>
+        {% endif %}
+      </div>
+      <div><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="workflow-section section-ambient" id="cara-kerja">
+  <div class="signal-field" aria-hidden="true">
+    <i class="signal-dot signal-dot-live"></i>
+    <i class="bg-signal signal-coral"></i>
+    <i class="data-particle particle-c"></i>
+  </div>
+  <div class="section-heading section-heading-light workflow-heading" data-reveal>
+    <span class="section-label">Cara Kerja</span>
+    <h2 class="display display-lg">Cara Kerja Presensigo</h2>
+    <p class="lead">Proses absensi dibuat sederhana untuk peserta, karyawan, admin, dan manajemen.</p>
+  </div>
+  <div class="workflow-layout">
+    <div class="workflow-progress" data-workflow-progress aria-label="Progres cara kerja">
+      {% for item in workflow %}
+      <button class="{{ 'is-active' if loop.first else '' }}" type="button" data-workflow-jump="{{ loop.index0 }}">
+        <span>{{ loop.index }}</span>{{ item.title }}
+      </button>
+      {% endfor %}
+    </div>
+    <div class="workflow-viewport" data-reveal>
+      <div class="workflow-track" data-workflow-track>
+        {% for item in workflow %}
+        <article class="workflow-card workflow-{{ item.slug }} {{ 'is-active' if loop.first else '' }}" data-workflow-card data-index="{{ loop.index0 }}">
+          <div class="workflow-visual" aria-hidden="true">
+            <span class="workflow-number">{{ item.number }}</span>
+            {% if item.slug == "scan" %}<span class="mini-qr"></span><span class="mini-scan"></span>
+            {% elif item.slug == "location" %}<span class="mini-pin"></span><span class="mini-pulse"></span>
+            {% elif item.slug == "sync" %}<span class="mini-row"></span><span class="mini-row"></span><span class="mini-row"></span>
+            {% elif item.slug == "monitor" %}<span class="mini-chart"></span>
+            {% else %}<span class="mini-file"></span>{% endif %}
+          </div>
+          <span class="workflow-kicker">Tahap {{ loop.index }} dari {{ workflow|length }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="workflow-scroll-progress" aria-hidden="true">
+    <span data-workflow-progress-bar></span>
+  </div>
+</section>
+
+<section class="section-shell feature-section section-ambient scan-sweep" id="fitur">
+  <div class="data-stream data-stream-feature" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="section-heading" data-reveal>
+    <span class="section-label">Fitur Utama</span>
+    <h2 class="display display-lg">Fitur yang Membuat Absensi Lebih Terkontrol</h2>
+    <p class="lead">Fitur penting untuk membantu organisasi mengelola kehadiran secara lebih cepat dan akurat.</p>
+  </div>
+  <div class="feature-grid" data-reveal-group>
+    {% for feature in features %}
+    <article class="feature-tile" data-reveal style="--delay:{{ loop.index0 * 60 }}ms">
+      <span class="number">{{ feature.number }}</span>
+      <div class="feature-icon" aria-hidden="true">
+        {% if feature.slug == "qr" %}<svg viewBox="0 0 48 48"><path d="M5 5h14v14H5zM29 5h14v14H29zM5 29h14v14H5zM29 29h6v6h-6zM37 29h6v14H29v-6"/></svg>
+        {% elif feature.slug == "gps" %}<svg viewBox="0 0 48 48"><path d="M24 43s13-11 13-24a13 13 0 1 0-26 0c0 13 13 24 13 24Z"/><circle cx="24" cy="19" r="5"/></svg>
+        {% elif feature.slug == "dashboard" %}<svg viewBox="0 0 48 48"><path d="M5 7h38v34H5zM5 16h38M15 16v25M21 34l6-8 5 3 7-10"/></svg>
+        {% else %}<svg viewBox="0 0 48 48"><path d="M10 5h22l7 7v31H10zM32 5v9h7M17 23h15M17 30h15M17 37h10"/></svg>{% endif %}
+      </div>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-shell pricing-section animated-grid section-ambient" id="paket">
+  <div class="signal-field" aria-hidden="true">
+    <i class="bg-pulse pulse-pricing"></i>
+    <i class="floating-shape shape-pricing"></i>
+  </div>
+  <div class="section-heading pricing-section-heading" data-reveal>
+    <span class="section-label">Tiga Cara Implementasi</span>
+    <h2 class="display display-lg">Pilih Model yang Paling Cocok untuk Organisasi Anda</h2>
+    <p class="lead">Setiap organisasi punya kondisi berbeda. Gunakan sistem siap pakai, integrasikan Presensigo ke website yang sudah ada, atau bangun website resmi baru sekaligus sistem absensinya.</p>
+  </div>
+  <div class="pricing-strategy-strip" data-reveal-group>
+    {% for package in packages %}
+    <article class="strategy-card strategy-{{ package.mode }}" data-reveal style="--delay:{{ loop.index0 * 70 }}ms">
+      <span class="strategy-number">0{{ loop.index }}</span>
+      <span class="package-mode-icon mode-{{ package.mode }}" aria-hidden="true"></span>
+      <div><strong>{{ package.label }}</strong><p>{{ package.tagline }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="pricing-layout">
+    <aside class="pricing-intro" data-reveal>
+      <span class="section-label">Paket Layanan</span>
+      <h2 class="display display-md">Pilih Cara Implementasi Presensigo</h2>
+      <p>Mulai cepat dengan sistem siap pakai, hubungkan ke website existing, atau serahkan website dan sistem absensi dalam satu implementasi.</p>
+      <a class="button-primary button-arrow" href="{{ whatsapp_url }}" target="_blank" rel="noopener"><span>Konsultasi Paket</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </aside>
+    <div class="pricing-stack" data-reveal-group>
+      {% for package in packages %}
+      <article class="price-card package-{{ package.mode }} {{ 'featured' if package.featured else '' }}" data-reveal style="--delay:{{ loop.index0 * 90 }}ms">
+        <div class="price-index">
+          <span>0{{ loop.index }}</span>
+          <span>{{ "Paling Direkomendasikan" if package.featured else package.label }}</span>
+        </div>
+        <div class="package-title-row">
+          <span class="package-mode-icon mode-{{ package.mode }}" aria-hidden="true"></span>
+          <div><span class="package-label">{{ package.label }}</span><h3>{{ package.name }}</h3></div>
+        </div>
+        <p class="package-tagline">{{ package.tagline }}</p>
+        <p class="package-description">{{ package.description }}</p>
+        <p class="package-audience"><strong>Cocok untuk:</strong> {{ package.audience }}</p>
+        <ul class="package-features">{% for feature in package.features %}<li>{{ feature }}</li>{% endfor %}</ul>
+        {% if package.limitations %}
+        <div class="package-limitations"><strong>Catatan:</strong>{% for item in package.limitations %}<span>{{ item }}</span>{% endfor %}</div>
+        {% endif %}
+        <a class="button-dark button-arrow" href="{{ package_whatsapp_urls[package.name] }}" target="_blank" rel="noopener"><span>Pilih {{ package.name }}</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="package-consult" data-reveal>
+    <p>Belum yakin memilih paket? Konsultasikan kebutuhan organisasi Anda terlebih dahulu. Kami akan membantu menentukan apakah cukup memakai sistem siap pakai, integrasi ke website existing, atau membangun website baru beserta sistemnya.</p>
+    <a class="button-primary" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Konsultasi Paket</a>
+  </div>
+</section>
+
+<section class="gallery-home section-ambient" id="galeri">
+  <div class="section-heading section-heading-light" data-reveal>
+    <span class="section-label">Tampilan Sistem</span>
+    <h2 class="display display-lg">Praktis untuk Admin. Jelas untuk Manajemen.</h2>
+    <p class="lead">Alur yang mudah dipahami tanpa mengorbankan detail operasional.</p>
+  </div>
+  <div class="gallery-showcase-toolbar" data-reveal>
+    <div><span data-gallery-count>01 / 05</span><strong data-gallery-status>Dashboard Monitoring</strong></div>
+    <div class="gallery-controls">
+      <button type="button" aria-label="Tampilan sebelumnya" data-gallery-prev>&larr;</button>
+      <button type="button" aria-label="Tampilan berikutnya" data-gallery-next>&rarr;</button>
+    </div>
+  </div>
+  <div class="gallery-showcase-viewport" data-reveal>
+    <div class="gallery-showcase-track" data-gallery-track>
+    <article class="gallery-slide gallery-dashboard is-active" data-gallery-card data-title="Dashboard Monitoring" data-index="0">
+      <div class="gallery-caption"><span>01 / Dashboard</span><strong>Monitoring kehadiran real-time</strong></div>
+      <div class="report-ui"><div><span>Nama</span><span>Status</span><span>Waktu</span></div><div><span>Aulia Rahman</span><span>Hadir</span><span>07:31</span></div><div><span>Sinta Maharani</span><span>Terlambat</span><span>07:44</span></div><div><span>Fajar Nugraha</span><span>Izin</span><span>-</span></div></div>
+    </article>
+    <article class="gallery-slide gallery-scan" data-gallery-card data-title="QR Scanner Mobile" data-index="1"><div class="gallery-caption"><span>02 / Mobile</span><strong>Scan QR lebih cepat</strong></div><div class="scanner-ui"><div class="qr-frame" aria-hidden="true">{% for item in range(25) %}<i></i>{% endfor %}</div><div class="scan-line"></div></div></article>
+    <article class="gallery-slide gallery-location" data-gallery-card data-title="Validasi GPS" data-index="2"><div class="gallery-caption"><span>03 / GPS</span><strong>Lokasi tervalidasi</strong></div><div class="map-ui"><div class="map-pin"></div></div></article>
+    <article class="gallery-slide gallery-report" data-gallery-card data-title="Laporan Otomatis" data-index="3"><div class="gallery-caption"><span>04 / Report</span><strong>Rekap siap digunakan</strong></div><div class="report-ui"><div><span>Periode</span><span>Status</span><span>Data</span></div><div><span>Hari ini</span><span>Aktif</span><span>257</span></div><div><span>Minggu ini</span><span>Final</span><span>1.284</span></div><div><span>Bulan ini</span><span>Proses</span><span>4.976</span></div></div></article>
+    <article class="gallery-slide gallery-admin" data-gallery-card data-title="Admin Control Panel" data-index="4"><div class="gallery-caption"><span>05 / Admin</span><strong>Konfigurasi terpusat</strong></div><div class="admin-panel-ui"><span>Jadwal & Shift</span><span>Radius Lokasi</span><span>Pengguna</span><span>Format Laporan</span></div></article>
+    </div>
+  </div>
+  <a class="gallery-link button-secondary button-arrow" href="/galeri"><span>Lihat Galeri Lengkap</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</section>
+
+<section class="section-shell testimonial-section" id="testimoni">
+  <div class="section-heading" data-reveal>
+    <span class="section-label">Testimoni</span>
+    <h2 class="display display-lg">Dipercaya untuk Membantu Absensi Lebih Rapi</h2>
+    <p class="lead">Contoh pengalaman yang menggambarkan nilai operasional Presensigo.</p>
+  </div>
+  <div class="testimonial-grid" data-reveal-group>
+    {# TODO: Ganti testimoni placeholder dengan testimoni asli dari klien. #}
+    {% for item in testimonials %}
+    <article class="quote-card" data-reveal style="--delay:{{ loop.index0 * 70 }}ms">
+      <div><div class="quote-mark">&ldquo;</div><blockquote>{{ item.quote }}</blockquote></div>
+      <cite><strong>{{ item.name }}</strong><span>{{ item.role }}</span></cite>
+    </article>
+    {% endfor %}
+  </div>
+  <a class="text-link" href="/testimoni">Lihat halaman testimoni <span>&rarr;</span></a>
+</section>
+
+<section class="faq-home" id="faq-ringkas">
+  <div class="faq-home-intro" data-reveal>
+    <span class="section-label">FAQ</span>
+    <h2 class="display display-lg">Pertanyaan yang Sering Diajukan</h2>
+    <p class="lead">Jawaban ringkas sebelum Anda masuk ke tahap konsultasi.</p>
+    <a class="text-link" href="/faq">Lihat semua pertanyaan <span>&rarr;</span></a>
+  </div>
+  <div class="faq-wrap" data-reveal>
+    {% for item in faqs %}
+    <article class="faq-item">
+      <button class="faq-question" type="button" aria-expanded="false" aria-controls="home-faq-{{ loop.index }}" data-faq-button>
+        <b>0{{ loop.index }}</b><span>{{ item.question }}</span><i class="faq-plus" aria-hidden="true"></i>
+      </button>
+      <div class="faq-answer" id="home-faq-{{ loop.index }}"><p>{{ item.answer }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="contact-cta section-ambient signal-wave" id="konsultasi">
+  <div class="signal-field" aria-hidden="true">
+    <i class="bg-pulse pulse-contact"></i>
+    <i class="signal-dot signal-dot-blue"></i>
+    <i class="bg-signal signal-contact"></i>
+  </div>
+  <div class="contact-cta-copy js-cta-copy" data-reveal>
+    <span class="section-label">Mulai Konsultasi</span>
+    <h2 class="display display-lg">Siap Transformasi Sistem Absensi Anda?</h2>
+    <p class="lead">Ceritakan kebutuhan organisasi Anda. Kami akan membantu memilih solusi dari kebutuhan sederhana hingga sistem yang lebih lengkap.</p>
+    <div class="contact-direct">
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener"><span>WhatsApp</span><strong>0859 5976 3633</strong></a>
+      <a href="{{ email_url }}"><span>Email</span><strong>{{ contact_email }}</strong></a>
+    </div>
+  </div>
+  <div class="contact-cta-form js-cta-form" data-reveal>
+    <form class="contact-form" action="/contact" method="post" data-contact-form>
+      <div class="form-field"><label for="home-name">Nama</label><input id="home-name" name="name" type="text" minlength="2" maxlength="100" required placeholder="Nama lengkap"></div>
+      <div class="form-field"><label for="home-organization">Instansi/Organisasi</label><input id="home-organization" name="organization" type="text" maxlength="150" placeholder="Nama organisasi"></div>
+      <div class="form-field full"><label for="home-contact">Email atau WhatsApp</label><input id="home-contact" name="contact" type="text" minlength="3" maxlength="150" required placeholder="Kontak aktif"></div>
+      <div class="form-field full"><label for="home-message">Kebutuhan</label><textarea id="home-message" name="message" minlength="3" maxlength="1200" required placeholder="Jumlah pengguna, lokasi, atau kebutuhan laporan..."></textarea></div>
+      <div class="form-actions"><button class="button-primary button-arrow" type="submit"><span>Kirim Konsultasi</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><div class="form-status" data-form-status aria-live="polite"></div></div>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Testimoni | PRESENSIGO{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div>
+    <span class="section-label">Testimoni</span>
+    <h1 class="display display-xl">Operasional Lebih Ringkas. Data Lebih Jelas.</h1>
+    <p class="lead">Contoh format testimoni untuk menggambarkan nilai yang dirasakan pengguna institusi.</p>
+  </div>
+  <aside class="page-hero-aside">
+    <strong>Perspektif Pengguna</strong>
+    <p>Ilustrasi pengalaman operasional yang perlu diganti dengan testimoni klien setelah memperoleh persetujuan publikasi.</p>
+  </aside>
+</section>
+
+<section class="section-shell">
+  <div class="section-grid" style="display:block">
+    <span class="section-label">Suara Pengguna</span>
+    <h2 class="display display-lg" style="max-width:900px;margin-top:1rem">Yang Berubah Bukan Hanya Cara Absen.</h2>
+    <div class="testimonial-grid">
+      {% for item in testimonials %}
+      <article class="quote-card" data-reveal>
+        <div>
+          <div class="quote-mark">&ldquo;</div>
+          <blockquote>{{ item.quote }}</blockquote>
+        </div>
+        <cite><strong>{{ item.name }}</strong><span>{{ item.role }}</span></cite>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="client-band">
+  <div class="section-grid">
+    <div style="grid-column:1/span 8">
+      <span class="section-label">Buktikan pada Proses Anda</span>
+      <h2 class="display display-lg">Mulai dari Kebutuhan Nyata.</h2>
+    </div>
+    <div style="grid-column:9/-1;align-self:end">
+      <a class="button-dark" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Jadwalkan Konsultasi</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

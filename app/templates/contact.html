@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Kontak & Pemesanan | PRESENSIGO{% endblock %}
+{% block content %}
+<section class="contact-layout">
+  <div class="contact-info" data-reveal>
+    <span class="section-label">Kontak / Pemesanan</span>
+    <h1 class="display display-lg">Ceritakan Cara Tim Anda Mengelola Kehadiran.</h1>
+    <p class="lead">Kami membantu memetakan kebutuhan, paket, dan tahapan implementasi yang paling masuk akal.</p>
+    <div class="contact-data">
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener">WhatsApp &middot; 0859 5976 3633</a>
+      <a href="{{ email_url }}">Email &middot; {{ contact_email }}</a>
+      <span class="micro">Respons konsultasi pada jam kerja</span>
+    </div>
+  </div>
+  <div class="contact-form-wrap" data-reveal>
+    <form class="contact-form" action="/contact" method="post" data-contact-form>
+      <div class="form-field">
+        <label for="name">Nama</label>
+        <input id="name" name="name" type="text" minlength="2" maxlength="100" required placeholder="Nama lengkap">
+      </div>
+      <div class="form-field">
+        <label for="organization">Instansi/Organisasi</label>
+        <input id="organization" name="organization" type="text" maxlength="150" placeholder="Nama organisasi">
+      </div>
+      <div class="form-field full">
+        <label for="contact">Email atau WhatsApp</label>
+        <input id="contact" name="contact" type="text" minlength="3" maxlength="150" required placeholder="Kontak aktif">
+      </div>
+      <div class="form-field full">
+        <label for="message">Kebutuhan</label>
+        <textarea id="message" name="message" minlength="3" maxlength="1200" required placeholder="Jumlah pengguna, lokasi, kebutuhan laporan, atau integrasi..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="button-primary button-arrow" type="submit"><span>Kirim Permintaan</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <a class="button-secondary" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Pesan via WhatsApp</a>
+        <div class="form-status" data-form-status aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

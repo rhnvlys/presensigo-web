@@ -4,8 +4,14 @@
 
 Upgrade the current Premium Brutalist frontend with GSAP 3.12.5 and
 ScrollTrigger for precise hero sequencing, pinned horizontal storytelling,
-scrubbed parallax, and active-state transitions. FastAPI, Jinja, local CSS, and
-Vanilla JavaScript remain the application architecture.
+scrubbed parallax, active-state transitions, and a short validation-themed
+preloader. FastAPI, Jinja, local CSS, and Vanilla JavaScript remain the
+application architecture.
+
+Units.gr is used only as an experience reference for the rhythm of its
+fullscreen wordmark loading, staged page reveal, scene-like section changes,
+and horizontal storytelling. No Units branding, assets, imagery, colors, or
+layout are reproduced.
 
 ## Progressive Enhancement
 
@@ -19,9 +25,29 @@ before registering the plugin or creating timelines. If either script fails:
 - native scroll-snap workflow/gallery remain usable;
 - no undefined global is referenced.
 
+## Preloader
+
+The body includes a fullscreen PRESENSIGO validation overlay with wordmark, QR
+scan frame, GPS pulse, data dots, percentage, progress bar, and status text.
+Statuses progress through:
+
+1. `Menyiapkan Sistem...`
+2. `Memuat Dashboard...`
+3. `Mengaktifkan QR + GPS...`
+4. `Siap Digunakan`
+
+GSAP completes the loader in approximately 1.8 seconds, wipes it upward, adds
+`is-loaded` to the body, restores focus/scroll access, and starts the hero
+timeline. A three-second safety timeout always dismisses the overlay. CSS
+includes a no-script/failure animation that removes pointer interception, so
+the page cannot remain permanently locked.
+
+Reduced motion completes the status/progress immediately and dismisses the
+overlay in under 350ms without scan/floating movement.
+
 ## Hero
 
-Desktop remains a balanced two-column first viewport. Copy occupies the left
+Desktop remains a balanced two-column first viewport after loading. Copy occupies the left
 column and dashboard/phone occupy the right column. GSAP animates navbar,
 background, headline lines, supporting copy, CTAs, chips, dashboard, phone, and
 signal dots in a 1.6-2.2 second sequence.

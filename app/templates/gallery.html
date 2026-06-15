@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Galeri Produk | PRESENSIGO{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div>
+    <span class="section-label">Galeri / Portofolio</span>
+    <h1 class="display display-xl">Lihat Data. Bukan Tebak-Tebakan.</h1>
+    <p class="lead">Contoh tampilan alur utama PRESENSIGO dari dashboard sampai laporan.</p>
+  </div>
+  <aside class="page-hero-aside">
+    <strong>Product Preview</strong>
+    <p>Mockup ini menggambarkan modul yang dapat disesuaikan saat implementasi.</p>
+  </aside>
+</section>
+
+<section class="gallery-stage">
+  <div class="gallery-layout">
+    <article class="gallery-main" data-reveal>
+      <div class="gallery-caption">
+        <div><span>01 / Dashboard</span><h2>Ringkasan Kehadiran</h2></div>
+        <span>Live Operational View</span>
+      </div>
+      <div class="dashboard-shell" style="width:100%;min-height:500px;transform:none;box-shadow:none">
+        <div class="dashboard-top"><span>PRESENSIGO / Dashboard</span><span class="dashboard-dots"><i></i><i></i><i></i></span></div>
+        <div class="dashboard-body">
+          <aside class="dashboard-sidebar"><span>Overview</span><span>Kehadiran</span><span>Lokasi</span><span>Laporan</span></aside>
+          <div class="dashboard-main">
+            <div class="dashboard-title"><div><strong>Rekap Hari Ini</strong><small>Seluruh unit aktif</small></div><span class="micro">Synced</span></div>
+            <div class="status-grid">
+              <div class="status-card"><small>Hadir</small><b>86%</b></div>
+              <div class="status-card"><small>Terlambat</small><b>9%</b></div>
+              <div class="status-card"><small>Izin</small><b>5%</b></div>
+            </div>
+            <div class="chart"><svg viewBox="0 0 400 120" preserveAspectRatio="none"><path d="M0 92 C42 86, 70 38, 105 58 S155 100, 200 48 S260 18, 300 60 S350 82, 400 22"/></svg></div>
+            <div class="attendance-list">
+              <div class="attendance-row"><span><i></i> Unit Akademik A</span><span>96 hadir</span><span>Terverifikasi</span></div>
+              <div class="attendance-row"><span><i></i> Unit Akademik B</span><span>84 hadir</span><span>Terverifikasi</span></div>
+              <div class="attendance-row"><span><i></i> Unit Akademik C</span><span>77 hadir</span><span>Terverifikasi</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="gallery-side">
+      <article data-reveal>
+        <div class="gallery-caption"><div><span>02 / GPS</span><h3>Validasi Lokasi</h3></div></div>
+        <div class="map-ui"><div class="map-pin"></div></div>
+      </article>
+      <article data-reveal>
+        <div class="gallery-caption"><div><span>03 / QR</span><h3>Pemindai Mobile</h3></div></div>
+        <div class="scanner-ui">
+          <div class="qr-frame" aria-hidden="true">{% for item in range(25) %}<i></i>{% endfor %}</div>
+          <div class="scan-line"></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="gallery-layout gallery-layout-report">
+    <article class="gallery-main" style="min-height:430px" data-reveal>
+      <div class="gallery-caption"><div><span>04 / Report</span><h2>Laporan Otomatis</h2></div><span>Export Ready</span></div>
+      <div class="report-ui">
+        <div><span>Nama</span><span>Status</span><span>Waktu</span></div>
+        <div><span>Aulia Rahman</span><span>Hadir</span><span>07:31</span></div>
+        <div><span>Sinta Maharani</span><span>Hadir</span><span>07:34</span></div>
+        <div><span>Fajar Nugraha</span><span>Terlambat</span><span>07:39</span></div>
+        <div><span>Nadia Putri</span><span>Izin</span><span>-</span></div>
+      </div>
+    </article>
+    <article class="gallery-main" style="min-height:430px;background:var(--coral);color:var(--ink)" data-reveal>
+      <div class="gallery-caption"><div><span style="color:var(--ink)">05 / Workflow</span><h2>Admin Tetap Memegang Kontrol</h2></div></div>
+      <p class="lead">Konfigurasi jadwal, radius lokasi, pengguna, dan format laporan dari satu panel yang konsisten.</p>
+      <a class="button-dark" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Minta Demo Produk</a>
+    </article>
+  </div>
+</section>
+{% endblock %}

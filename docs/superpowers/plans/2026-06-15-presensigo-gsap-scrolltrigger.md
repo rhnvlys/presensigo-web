@@ -2,7 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add fault-tolerant GSAP 3.12.5 and ScrollTrigger animation orchestration to the current PRESENSIGO frontend.
+**Goal:** Add a Units-inspired validation preloader and fault-tolerant GSAP
+3.12.5/ScrollTrigger animation orchestration to the current PRESENSIGO
+frontend without copying Units visual identity.
 
 **Architecture:** Keep FastAPI/Jinja output and CSS final states usable without
 JavaScript. Load GSAP before `site.js`, isolate GSAP setup behind capability and
@@ -21,11 +23,13 @@ ScrollTrigger 3.12.5, pytest, Playwright CLI.
 - Modify: `app/templates/home.html`
 
 - [ ] Add failing tests for exact GSAP/ScrollTrigger CDN URLs, script order,
-  required `.js-*` hooks, workflow progress bar, data stream, and absence of
-  public `Close` text.
+  preloader structure/status copy, required `.js-*` hooks, workflow progress
+  bar, data stream, and absence of public `Close` text.
 - [ ] Run focused tests and verify they fail for missing GSAP assets/hooks.
 - [ ] Load both CDN scripts before `site.js`.
 - [ ] Add semantic JS hooks without hiding final content.
+- [ ] Add the fullscreen validation preloader with QR/GPS/data visuals,
+  progress, percentage, status, and accessible loading semantics.
 - [ ] Add workflow progress bar and decorative data-stream/blob layers.
 - [ ] Re-run focused tests and confirm pass.
 
@@ -44,11 +48,15 @@ ScrollTrigger 3.12.5, pytest, Playwright CLI.
 - [ ] Preserve CSS keyframes for QR, grid, sweep, pulse, live state, and hover.
 - [ ] Add reduced-motion rules that force final static state.
 
-### Task 3: Implement fault-tolerant GSAP orchestration
+### Task 3: Implement preloader and fault-tolerant GSAP orchestration
 
 **Files:**
 - Modify: `app/static/js/site.js`
 
+- [ ] Implement `initPreloader()` with load event, four status steps,
+  1.4-2.2 second duration, upward wipe, body `is-loaded`, and a three-second
+  force-close timeout.
+- [ ] Start the hero timeline only after the preloader completes.
 - [ ] Split QR initialization into an immediately available controller with a
   `start()` method so GSAP can start the loop after phone entrance.
 - [ ] Detect GSAP safely using `window.gsap` and `window.ScrollTrigger`.
@@ -61,6 +69,8 @@ ScrollTrigger 3.12.5, pytest, Playwright CLI.
 - [ ] Add gallery active scale/caption integration.
 - [ ] Add ambient parallax and refresh triggers after layout settles.
 - [ ] Use `gsap.matchMedia()` to avoid pins/scrub for mobile and reduced motion.
+- [ ] Provide a no-GSAP fallback that dismisses the preloader and leaves all
+  content usable without console errors.
 
 ### Task 4: Update QR/dashboard state
 
@@ -85,6 +95,7 @@ ScrollTrigger 3.12.5, pytest, Playwright CLI.
 - Modify: `docs/asset-analysis.md`
 
 - [ ] Document CDN progressive enhancement and fallback.
+- [ ] Document the Units-inspired loading rhythm and explicit non-copying rule.
 - [ ] Document pinned workflow, scrub, parallax, and matchMedia behavior.
 - [ ] Update asset analysis to note that GSAP animates code-native layers only.
 - [ ] Replace the report with the required GSAP + ScrollTrigger structure.
@@ -98,6 +109,8 @@ ScrollTrigger 3.12.5, pytest, Playwright CLI.
 - [ ] Run full pytest and JavaScript syntax checks.
 - [ ] Verify seven public routes and four health/contact endpoints.
 - [ ] Verify CDN load and zero console errors.
+- [ ] Verify loader status/progress, automatic completion, force-close safety,
+  and reduced-motion fast completion.
 - [ ] Verify 1440px hero product visual is inside first viewport.
 - [ ] Verify problems reveal, sticky benefits, pinned workflow, progress bar,
   pricing highlights, gallery showcase, CTA, QR cycle, counter, and chart.

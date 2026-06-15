@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Layanan & Paket | PRESENSIGO{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div>
+    <span class="section-label">Layanan & Paket</span>
+    <h1 class="display display-xl">Kontrol Kehadiran dari Satu Tempat.</h1>
+    <p class="lead">Pilih fondasi fitur yang sesuai, lalu sesuaikan implementasi dengan proses institusi Anda.</p>
+  </div>
+  <aside class="page-hero-aside">
+    <strong>Implementasi Terarah</strong>
+    <p>Analisis kebutuhan, konfigurasi, pelatihan admin, dan dukungan aktivasi.</p>
+  </aside>
+</section>
+
+<section class="section-shell">
+  <div class="section-grid">
+    <div class="features-intro">
+      <span class="section-label">Fitur Inti</span>
+      <h2 class="display display-lg">Data Masuk. Sistem Bekerja.</h2>
+      <p class="lead">Tiga kemampuan inti yang menjadi fondasi seluruh paket PRESENSIGO.</p>
+    </div>
+    <div class="features-list">
+      {% for feature in features %}
+      <article class="feature-card" data-reveal>
+        <span class="number">{{ feature.number }}</span>
+        <div><h3>{{ feature.title }}</h3><p>{{ feature.description }}</p></div>
+        <div class="feature-icon" aria-hidden="true">
+          {% if feature.slug == "qr" %}
+          <svg viewBox="0 0 48 48"><path d="M5 5h14v14H5zM29 5h14v14H29zM5 29h14v14H5zM29 29h6v6h-6zM37 29h6v14H29v-6"/></svg>
+          {% elif feature.slug == "gps" %}
+          <svg viewBox="0 0 48 48"><path d="M24 43s13-11 13-24a13 13 0 1 0-26 0c0 13 13 24 13 24Z"/><circle cx="24" cy="19" r="5"/></svg>
+          {% else %}
+          <svg viewBox="0 0 48 48"><path d="M10 5h22l7 7v31H10zM32 5v9h7M17 23h15M17 30h15M17 37h10"/></svg>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-shell pricing-section animated-grid section-ambient">
+  <div class="section-heading pricing-section-heading" data-reveal>
+    <span class="section-label">Tiga Cara Implementasi</span>
+    <h2 class="display display-lg">Pilih Model yang Paling Cocok untuk Organisasi Anda</h2>
+    <p class="lead">Gunakan Presensigo sebagai sistem siap pakai, integrasikan ke website yang sudah ada, atau minta kami membuatkan website resmi lengkap dengan sistem absensi digital.</p>
+  </div>
+  <div class="pricing-strategy-strip" data-reveal-group>
+    {% for package in packages %}
+    <article class="strategy-card strategy-{{ package.mode }}" data-reveal>
+      <span class="strategy-number">0{{ loop.index }}</span>
+      <span class="package-mode-icon mode-{{ package.mode }}" aria-hidden="true"></span>
+      <div><strong>{{ package.label }}</strong><p>{{ package.tagline }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="pricing-layout">
+    <aside class="pricing-intro" data-reveal>
+      <span class="section-label">Paket Layanan</span>
+      <h2 class="display display-md">Pilih Cara Implementasi Presensigo</h2>
+      <p>Setiap paket menjawab kondisi bisnis yang berbeda, dari kebutuhan cepat sampai website resmi dan sistem terintegrasi.</p>
+      <a class="button-primary" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Konsultasi Paket</a>
+    </aside>
+    <div class="pricing-stack">
+      {% for package in packages %}
+      <article class="price-card package-{{ package.mode }} {{ 'featured' if package.featured else '' }}" data-reveal>
+        <div class="price-index"><span>0{{ loop.index }}</span><span>{{ "Paling Direkomendasikan" if package.featured else package.label }}</span></div>
+        <div class="package-title-row">
+          <span class="package-mode-icon mode-{{ package.mode }}" aria-hidden="true"></span>
+          <div><span class="package-label">{{ package.label }}</span><h3>{{ package.name }}</h3></div>
+        </div>
+        <p class="package-tagline">{{ package.tagline }}</p>
+        <p class="package-description">{{ package.description }}</p>
+        <p class="package-audience"><strong>Cocok untuk:</strong> {{ package.audience }}</p>
+        <ul class="package-features">{% for feature in package.features %}<li>{{ feature }}</li>{% endfor %}</ul>
+        {% if package.limitations %}
+        <div class="package-limitations"><strong>Catatan:</strong>{% for item in package.limitations %}<span>{{ item }}</span>{% endfor %}</div>
+        {% endif %}
+        <a class="button-dark" href="{{ package_whatsapp_urls[package.name] }}" target="_blank" rel="noopener">Pilih {{ package.name }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="package-consult" data-reveal>
+    <p>Belum yakin memilih paket? Kami akan membantu menentukan apakah kebutuhan Anda cukup dengan sistem siap pakai, integrasi website existing, atau website baru beserta sistemnya.</p>
+    <a class="button-primary" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Konsultasi Paket</a>
+  </div>
+</section>
+
+<section class="client-band">
+  <div class="section-grid">
+    <div style="grid-column:1/span 8">
+      <span class="section-label">Butuh Penyesuaian?</span>
+      <h2 class="display display-lg">Kita Petakan Bersama.</h2>
+    </div>
+    <div style="grid-column:9/-1;align-self:end">
+      <a class="button-dark" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Diskusikan Kebutuhan Instansi</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

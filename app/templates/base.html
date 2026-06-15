@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PRESENSIGO adalah solusi absensi digital berbasis QR Code, validasi GPS, dashboard monitoring, dan laporan otomatis.">
+  <meta name="theme-color" content="#F5E3CD">
+  <title>{% block title %}PRESENSIGO | Absensi Digital QR & GPS{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/tailwind.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="{{ url_for('static', path='js/site.js') }}"></script>
+</head>
+<body class="antialiased">
+  <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Menyiapkan website PRESENSIGO">
+    <div class="preloader__grid" aria-hidden="true"></div>
+    <div class="preloader__inner">
+      <div class="preloader__logo">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <strong>PRESENSIGO</strong>
+      </div>
+      <div class="preloader__visual" aria-hidden="true">
+        <div class="preloader__scan">
+          <span></span><span></span><span></span><span></span>
+          <i></i>
+        </div>
+        <div class="preloader__gps"><i></i></div>
+        <div class="preloader__dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="preloader__meta">
+        <span class="preloader__status" data-preloader-status>Menyiapkan Sistem...</span>
+        <span class="preloader__percent" data-preloader-percent>0%</span>
+      </div>
+      <div class="preloader__progress" aria-hidden="true">
+        <span class="preloader__progress-bar" data-preloader-progress></span>
+      </div>
+      <span class="sr-only">
+        Menyiapkan Sistem... Memuat Dashboard... Mengaktifkan QR + GPS... Siap Digunakan
+      </span>
+    </div>
+  </div>
+  <a class="skip-link" href="#content">Lewati ke konten</a>
+  <header class="site-header js-nav" data-header data-intro="nav">
+    <a class="brand" href="/" aria-label="PRESENSIGO Home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>PRESENSIGO</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+      <span>Menu</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Navigasi utama" data-menu>
+      <a class="{{ 'active' if page == 'home' else '' }}" href="/">Home</a>
+      <a class="{{ 'active' if page == 'about' else '' }}" href="/tentang">Tentang</a>
+      <a class="{{ 'active' if page == 'services' else '' }}" href="/layanan">Layanan</a>
+      <a class="{{ 'active' if page == 'gallery' else '' }}" href="/galeri">Galeri</a>
+      <a class="{{ 'active' if page == 'testimonials' else '' }}" href="/testimoni">Testimoni</a>
+      <a class="{{ 'active' if page == 'faq' else '' }}" href="/faq">FAQ</a>
+    </nav>
+
+    <a class="header-cta button-arrow" href="{{ whatsapp_url }}" target="_blank" rel="noopener">
+      <span>Konsultasi</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </header>
+
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <a class="brand brand-footer" href="/">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>PRESENSIGO</span>
+        </a>
+        <p>Solusi absensi digital berbasis QR Code, validasi lokasi, dashboard monitoring, dan laporan otomatis untuk operasional yang lebih akurat dan efisien.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/tentang">Tentang</a>
+        <a href="/layanan">Layanan & Paket</a>
+        <a href="/galeri">Galeri Produk</a>
+        <a href="/testimoni">Testimoni</a>
+        <a href="/faq">FAQ</a>
+        <a href="/kontak">Kontak</a>
+      </div>
+      <div class="footer-contact">
+        <span>Mulai konsultasi</span>
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener">0859 5976 3633</a>
+        <a href="{{ email_url }}">{{ contact_email }}</a>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">PRESENSIGO</div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Presensigo. All rights reserved.</span>
+      <span>QR &middot; GPS &middot; AUTOMATED REPORT</span>
+    </div>
+  </footer>
+
+  <a class="floating-wa" href="{{ whatsapp_url }}" target="_blank" rel="noopener" aria-label="Konsultasi melalui WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 11.5a8 8 0 0 1-11.8 7l-4.2 1 1.1-4A8 8 0 1 1 20 11.5Z"/>
+      <path d="M8.5 8.3c.3 2.9 2.3 5 5.2 5.7l1.2-1.4 2 .9c-.4 1.7-1.4 2.5-3 2.5-3.8-.2-7.4-3.7-7.8-7.4 0-1.5.8-2.5 2.4-3l1 2-1 1.2Z"/>
+    </svg>
+  </a>
+</body>
+</html>
