@@ -360,3 +360,63 @@ Browser QA covers:
   supplied.
 - Drive assets inform layout, palette, type rhythm, and product framing; visually
   irrelevant food, property, and construction imagery is not embedded.
+
+## 14. Final Implementation Approval
+
+This specification is approved as the final implementation baseline.
+
+Implementation uses FastAPI, Jinja templates, structured local CSS, Vanilla
+JavaScript, CSS keyframes, and IntersectionObserver. The project will not migrate
+to React and will not use Framer Motion, GSAP, or another heavy animation
+dependency.
+
+## 15. Drive Asset Handling
+
+The Drive/ZIP assets are inspected before implementation and primarily inform:
+
+- visual direction;
+- layout and spacing;
+- color rhythm;
+- brutalist/editorial styling;
+- product framing;
+- dashboard and UI composition.
+
+Relevant UI, icon, grid, typography, and layout references have priority.
+Code-native attendance dashboard and QR scanner mockups are used because no
+official PRESENSIGO product screenshot is available.
+
+Food, property, construction, energy, and generic extracted website imagery may
+inform composition but will not be embedded when visually irrelevant.
+`docs/asset-analysis.md` separates:
+
+- assets used directly;
+- assets used only as references;
+- assets rejected as irrelevant.
+
+## 16. Contact Endpoint Compatibility
+
+Both `/contact` and `/api/contact` accept:
+
+- JSON request bodies; or
+- form-encoded submissions from a normal HTML form.
+
+Accepted fields:
+
+- `name`: required;
+- `contact`: required;
+- `message`: required;
+- `organization`: optional.
+
+All values are trimmed, required values reject empty input, and conservative
+maximum lengths apply. Credentials are never stored and server stack traces are
+not returned to the browser.
+
+Successful submissions return:
+
+```json
+{
+  "success": true,
+  "message": "Permintaan konsultasi berhasil diterima.",
+  "whatsapp_url": "encoded WhatsApp consultation URL"
+}
+```
