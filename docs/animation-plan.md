@@ -1,120 +1,141 @@
 # Rencana Animasi PRESENSIGO
 
-## Prinsip
+## Arah Motion
 
-- Units.gr menjadi referensi tempo loading, pinned storytelling, horizontal
-  movement, parallax, dan transisi scene saja.
-- Identitas visual tetap Premium Brutalist PRESENSIGO.
-- GSAP/ScrollTrigger menangani motion yang membutuhkan timeline dan presisi.
-- CSS keyframes menangani loop ringan: QR scan, moving grid, signal pulse,
-  scan sweep, data stream, live indicator, dan hover.
-- Konten visible secara default; fallback tetap usable tanpa CDN.
+- Referensi utama: video Tresmares Capital dan Private Equity yang diberikan.
+- Karakter: premium corporate, minimal, typographic, tegas, dan clean.
+- Elemen utama: big typography, coral geometric mask, dark panel, whitespace,
+  pinned scroll, dan horizontal movement.
+- Tidak digunakan: custom cursor, wave playful, particle loop, glow besar,
+  elastic easing, back easing, dan bounce dekoratif.
+
+## Pembagian Tanggung Jawab
+
+GSAP dan ScrollTrigger menangani:
+
+- loading intro;
+- hero cinematic reveal;
+- hero scroll transform;
+- geometric panel transition;
+- sticky benefit activation;
+- pinned horizontal workflow;
+- sticky pricing activation;
+- pinned horizontal product showcase;
+- reveal dan scrub berbasis scroll.
+
+CSS keyframes hanya menangani:
+
+- QR scan line;
+- live indicator pulse;
+- small GPS/data pulse;
+- hover micro-interaction.
 
 ## Loading
 
 1. Overlay near-black tampil fullscreen.
-2. Wordmark PRESENSIGO masuk.
-3. QR scan, GPS pulse, dan data dots aktif.
-4. Progress bergerak 0-100% dengan status:
-   `Menyiapkan Sistem...`, `Memuat Dashboard...`,
-   `Mengaktifkan QR + GPS...`, dan `Siap Digunakan`.
-5. Overlay wipe ke atas dan hero timeline dimulai.
+2. Wordmark PRESENSIGO masuk dari bawah.
+3. QR/GPS mini menjadi detail sekunder.
+4. Thin progress line bergerak dengan status:
+   `Menyiapkan sistem`, `Memuat dashboard`, `Validasi QR + GPS`, dan
+   `Siap digunakan`.
+5. Coral panel menutup scene, lalu overlay bergerak ke atas.
+6. Hero timeline dimulai setelah loader tersembunyi.
 
-Durasi normal sekitar 2 detik. Timeout paksa tiga detik memastikan overlay
-tidak mengunci halaman. Reduced motion selesai sekitar 300ms.
+GSAP dan ScrollTrigger disajikan dari `app/static/vendor/`, sehingga loader
+tidak menunggu CDN. Durasi browser terukur sekitar 1,7 detik. Safety timeout
+2,2 detik tetap mencegah overlay mengunci halaman.
 
-## Hero Timeline
+## Hero
 
-- Navbar fade-down.
-- Grid fade-in.
-- Tiga baris headline reveal dari bawah.
-- Supporting copy dan CTA masuk.
-- Chips muncul stagger.
-- Dashboard masuk dari kanan dengan rotasi kecil.
-- Phone masuk dari kanan bawah.
-- Counter dan chart mulai.
-- QR simulation serta signal dots aktif.
+- Satu coral geometric mask menjadi scene opener.
+- Headline tiga baris reveal dengan `power3.out`.
+- Subheadline, CTA, dan chips masuk tanpa bounce.
+- Dashboard masuk dari kanan dengan scale kecil.
+- Phone QR masuk setelah dashboard.
+- QR simulation, counter, dan chart dimulai setelah product visual terlihat.
+- Saat scroll desktop, headline bergerak naik, dashboard scale turun sedikit,
+  phone bergerak naik, mask bergeser, dan grid bergerak lebih lambat.
 
-Hero desktop 1440px dijaga setinggi first viewport. Headline memakai tiga baris
-tanpa wrap; dashboard dan phone selesai sebelum batas 1000px viewport.
+## Section Transition
 
-## QR dan Dashboard
+- Hero ke Problems: coral diagonal geometric wipe.
+- Problems ke Why: near-black curtain naik dari bawah.
+- Why ke Workflow: coral/blue data line menarik secara horizontal.
+- FAQ ke Final CTA: coral geometric wipe.
 
-- QR cycle: scanning 1.45s, validating 1.05s, success 1.35s.
-- Phone memakai glow mustard saat validasi dan glow success saat berhasil.
-- Success check muncul, baris dashboard mendapat highlight, dan label
-  `Data masuk` ditampilkan.
-- Counter bergerak ke 86, 9, dan 5.
-- Chart SVG menggambar satu kali.
-- Dashboard floating perlahan setelah entrance.
+Semua transition memakai scrub linear dan tidak memakai wave SVG.
 
-## ScrollTrigger
+## Problems
 
-### Smooth Reveal
+- Heading dan copy memakai reveal editorial.
+- Empat cards masuk dengan stagger 0,09 detik.
+- Card hanya fade/slide; tidak memakai rotasi atau bounce.
+- Hover lift dibatasi sekitar lima pixel.
 
-- Heading dan content block bergerak dari `y: 58` ke posisi final.
-- Opacity awal 0.35 agar full-page capture tidak menghasilkan section kosong.
-- Problem cards memiliki stagger dan rotasi kecil dari -2 derajat.
+## Why PRESENSIGO
 
-### Sticky Benefit
+- Background near-black tanpa neon.
+- Intro kiri sticky mulai 900px.
+- Benefit rows aktif berdasarkan posisi viewport.
+- Active row memakai border coral, background sedikit lebih terang, lift kecil,
+  dan icon pulse halus.
 
-- Intro kiri memakai CSS sticky.
-- ScrollTrigger mengaktifkan benefit berdasarkan posisi viewport.
-- Active benefit mendapat indicator biru, background terang, dan icon pulse.
+## Cara Kerja
 
-### Pinned Workflow
-
-- Aktif pada `min-width: 900px`.
-- Section `#cara-kerja` dipin.
+- Desktop 900px ke atas memakai `pin: true` dan `scrub: 1`.
 - Track bergerak horizontal berdasarkan overflow aktual.
-- `scrub: 1` menghubungkan translate dengan scroll.
-- Progress bar dan step aktif mengikuti progress.
-- Di bawah 900px, cards kembali menjadi stack/native flow.
+- Active step dan progress line mengikuti ScrollTrigger progress.
+- Tombol step memindahkan scroll ke scene yang sesuai.
+- Mobile memakai vertical stack tanpa pin.
 
-### Sticky Pricing
+## Features
+
+- Enam card reveal dengan timing konsisten.
+- Tidak ada scan sweep atau data stream dekoratif.
+- Icon dan hover tetap ringan.
+
+## Pricing
 
 - Intro kiri sticky pada desktop.
 - Basic, Standard, dan Premium reveal satu per satu.
-- Standard mendapat active highlight dan scale maksimum 1.03.
-- Mobile memakai contained scroll-snap pada pricing stack.
+- Card dekat viewport center mendapat active state.
+- Scale maksimum 1,03 dan Standard tetap paling direkomendasikan.
+- Mobile memakai contained horizontal scroll-snap.
 
-### Product Showcase
+## Product Showcase
 
-- Galeri tetap contained horizontal scroll-snap agar ringan.
-- Caption dan slide aktif mengikuti card terdekat dari pusat.
-- GSAP memberi entrance stagger; tombol prev/next tetap native.
+- Desktop memakai pinned horizontal ScrollTrigger.
+- Vertical scroll menggerakkan track galeri.
+- Active item mengubah opacity, scale, caption, counter, dan progress line.
+- Tombol previous/next tetap berfungsi.
+- Mobile memakai contained horizontal scroll-snap tanpa pin.
 
-### Parallax dan Ambient
+## QR dan Dashboard
 
-- Blob mustard/coral serta glow bergerak dengan scrub ringan.
-- Grid, data stream, GPS dots, dan scan sweep tetap CSS-only.
-- Atmosfer section berganti cream, night, paper, dan coral/mustard.
+- QR cycle: scanning 1,4 detik, validating 1 detik, success 1,4 detik.
+- Success mengubah row dashboard menjadi `Baru`, `GPS valid`, dan
+  menampilkan badge `Data masuk`.
+- Counter bergerak ke 86, 9, dan 5.
+- Chart SVG menggambar satu kali.
+- Tidak ada floating dashboard loop.
 
 ## Fallback
 
-Jika GSAP/ScrollTrigger tidak tersedia:
+Jika GSAP atau ScrollTrigger tidak tersedia:
 
-- preloader berjalan dengan `requestAnimationFrame`;
-- hero memakai CSS intro;
+- loader memakai `requestAnimationFrame`;
 - reveal memakai IntersectionObserver;
 - workflow dan galeri memakai native scroll;
-- QR, counter, dan chart tetap berjalan;
-- tidak ada exception JavaScript.
+- QR, counter, dan chart tetap berfungsi;
+- seluruh konten tetap terlihat;
+- tidak ada undefined global.
 
 ## Reduced Motion
 
-- Preloader dipercepat.
-- GSAP tidak diinisialisasi dan jumlah ScrollTrigger adalah nol.
-- Pin, scrub, parallax, stagger, floating, moving grid, data stream, dan scan
-  loop dimatikan.
-- QR langsung `Absensi Berhasil`.
-- Counter langsung `86`, `9`, `5`.
-- Chart langsung memiliki `stroke-dashoffset: 0`.
+- Loader selesai cepat.
+- Tidak dibuat pin, scrub, parallax, atau stagger.
+- Workflow dan galeri kembali ke native layout.
+- QR langsung success.
+- Counter dan chart langsung final.
+- Progress bar langsung penuh.
 - Semua `[data-reveal]` terlihat.
-
-## Lokasi Implementasi
-
-- Template/hook: `app/templates/base.html`, `app/templates/home.html`
-- CSS/keyframes/responsive: `app/static/css/styles.css`
-- Timeline/fallback/state: `app/static/js/site.js`
-- Contract tests: `tests/test_app.py`

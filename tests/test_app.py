@@ -148,14 +148,20 @@ def test_home_contains_complete_sales_sections():
     assert "Cara Kerja Presensigo" in response.text
 
 
-def test_home_contains_ambient_and_horizontal_experience_hooks():
+def test_home_contains_premium_corporate_scene_hooks():
     html = client.get("/").text
 
     for marker in (
-        "animated-grid",
-        "signal-field",
-        "scan-sweep",
+        "panel-transition",
+        "red-mask",
+        "geometric-wipe",
+        "dark-panel",
+        "big-type",
+        "scroll-scene",
+        "horizontal-track",
         "pricing-strategy-strip",
+        "pricing-sticky",
+        "showcase-track",
         "data-workflow-track",
         "data-workflow-progress",
         "data-gallery-track",
@@ -165,19 +171,27 @@ def test_home_contains_ambient_and_horizontal_experience_hooks():
         assert marker in html
     assert "Pilih Cara Implementasi Presensigo" in html
     assert "Tiga Cara Implementasi" in html
+    assert "section-wave-container" not in html
+    assert "js-parallax-blob" not in html
 
 
 def test_gsap_and_scrolltrigger_load_before_site_script():
     html = client.get("/").text
-    gsap_url = "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
-    scrolltrigger_url = (
-        "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
-    )
+    gsap_url = "/static/vendor/gsap.min.js"
+    scrolltrigger_url = "/static/vendor/ScrollTrigger.min.js"
+    lenis_url = "/static/vendor/lenis.min.js"
 
     assert gsap_url in html
     assert scrolltrigger_url in html
+    assert lenis_url in html
     assert html.index(gsap_url) < html.index(scrolltrigger_url)
-    assert html.index(scrolltrigger_url) < html.index("/static/js/site.js")
+    assert html.index(scrolltrigger_url) < html.index(lenis_url)
+    assert html.index(lenis_url) < html.index("/static/js/site.js")
+    assert "cdn.jsdelivr.net/npm/gsap" not in html
+    assert "cdn.jsdelivr.net/npm/lenis" not in html
+    assert client.get(gsap_url).status_code == 200
+    assert client.get(scrolltrigger_url).status_code == 200
+    assert client.get(lenis_url).status_code == 200
 
 
 def test_home_contains_gsap_animation_hooks_and_no_close_artifact():
@@ -198,17 +212,21 @@ def test_home_contains_gsap_animation_hooks_and_no_close_artifact():
         "js-hero-chip",
         "js-dashboard",
         "js-phone",
-        "js-bg-dot",
-        "js-parallax-blob",
-        "data-stream",
+        "data-hero-mask",
+        "data-panel-transition",
+        "data-scene-transition",
+        "transition-packages-gallery",
         "data-workflow-progress-bar",
+        "data-gallery-progress-bar",
+        "data-gallery-description",
     ):
         assert marker in html
+    assert 'body class="antialiased is-preloading"' in html
     for status in (
-        "Menyiapkan Sistem...",
-        "Memuat Dashboard...",
-        "Mengaktifkan QR + GPS...",
-        "Siap Digunakan",
+        "Menyiapkan sistem",
+        "Memuat dashboard",
+        "Validasi QR + GPS",
+        "Siap digunakan",
     ):
         assert status in html
     assert ">Close<" not in html
@@ -220,10 +238,14 @@ def test_site_script_exposes_progressive_gsap_motion_contract():
     for function_name in (
         "initPreloader",
         "initGSAP",
+        "initSmoothScroll",
         "initHeroTimeline",
-        "initScrollReveals",
+        "initHeroScrollTransform",
+        "initSceneTransitions",
+        "initProblemsReveal",
         "initPinnedWorkflow",
         "initStickyBenefits",
+        "initFeaturesReveal",
         "initStickyPricing",
         "initProductShowcase",
         "initQRSimulation",
@@ -237,6 +259,17 @@ def test_site_script_exposes_progressive_gsap_motion_contract():
     assert "scrub: 1" in script
     assert "window.gsap" in script
     assert "window.ScrollTrigger" in script
+    assert "window.Lenis" in script
+    assert "window.presensigoLenis" in script
+    assert "gsap.ticker.add" in script
+    assert "gsap.matchMedia()" in script
+    assert "getCenteredTrackBounds" in script
+    assert 'document.body.classList.remove("is-preloading")' in script
+    assert '"motion-ready"' in script
+    assert "initCustomCursor" not in script
+    assert "elastic.out" not in script
+    assert "back.out" not in script
+    assert 'window.addEventListener("load", run' not in script
 
 
 def test_every_public_page_exposes_whatsapp_and_email():

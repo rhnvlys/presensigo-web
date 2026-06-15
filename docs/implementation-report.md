@@ -1,161 +1,284 @@
-# LAPORAN IMPLEMENTASI PRESENSIGO - UNITS-INSPIRED LOADING & SCROLL MOTION
+# LAPORAN IMPLEMENTASI PRESENSIGO — FINAL PREMIUM MOTION POLISH
 
 ## 1. Ringkasan Pekerjaan
 
-Website PRESENSIGO direvisi dengan loading sequence, GSAP hero intro,
-ScrollTrigger storytelling, pinned horizontal workflow, sticky benefit,
-sticky pricing, product showcase, parallax ambient, serta fallback native.
-Units.gr hanya menjadi referensi pengalaman motion; tidak ada aset, warna,
-layout spesifik, copy, atau identitas Units yang disalin.
+Final polish difokuskan pada kesinambungan motion, bukan penambahan dekorasi.
+FastAPI, Jinja, route, endpoint, data paket, form kontak, QR simulation,
+dashboard counter, serta CTA WhatsApp/email tetap dipertahankan.
 
-Stack tetap FastAPI, Jinja, CSS lokal, Vanilla JavaScript, GSAP, dan
-ScrollTrigger. Backend serta tujuh route detail dipertahankan.
+Revisi utama:
 
-## 2. Loading Animation
+- menghilangkan frame hitam/kosong saat loader keluar;
+- menambahkan Lenis smooth scroll lokal yang tersinkron dengan ScrollTrigger;
+- menurunkan dominasi red mask setelah hero intro;
+- memperkuat scene transition antar-section;
+- memusatkan active card pada workflow dan gallery;
+- menghilangkan ruang kosong pada awal/akhir pinned scene;
+- menambahkan caption gallery yang berubah halus;
+- mempertahankan fallback mobile, reduced motion, dan no-GSAP.
 
-- Overlay fullscreen memakai dashboard night dan technical grid.
-- Wordmark PRESENSIGO, QR frame, scan line, GPS pulse, dan data dots tampil di
-  tengah.
-- Progress 0-100% mengganti empat status validasi.
-- Setelah selesai, overlay wipe ke atas lalu hero timeline dimulai.
-- Durasi normal sekitar dua detik; timeout paksa maksimal tiga detik.
-- Tanpa GSAP, progress berjalan dengan `requestAnimationFrame`.
-- Reduced motion menyelesaikan loader sekitar 284ms.
+## 2. Masalah Video Sebelumnya yang Diperbaiki
 
-## 3. Hero Layout dan Intro
+### Black/blank screen
 
-- Hero desktop kembali menjadi dua kolom seimbang.
-- Headline dikunci menjadi tiga baris pada 1440px.
-- Dashboard dan phone berada dalam first viewport.
-- Pada 1440x1000, hero berakhir tepat di 1000px, dashboard di 820px, dan phone
-  di 888px.
-- Hero mobile satu kolom, copy di atas dan product mockup di bawah.
-- Tidak ditemukan teks `Close`, debug button, atau modal artifact.
-- Timeline: nav, grid, headline, copy, CTA, chips, dashboard, phone, dots, lalu
-  QR/counter/chart.
+Penyebabnya adalah isi loader memudar sebelum coral wipe menutup viewport.
+Selain itu, CSS dan GSAP sama-sama memberi `translateY(101%)`, sehingga jarak
+wipe terhitung dua kali.
 
-## 4. Background Animation
+Perbaikan:
 
-- Moving grid diagonal dengan durasi panjang.
-- Data stream horizontal untuk hero, benefit, dan features.
-- GPS/live dots dan data particles ditempatkan terbatas.
-- Scan sweep digunakan pada hero dan feature section.
-- Mustard/coral blobs serta blue-coral glow memakai GSAP parallax.
-- Atmosfer section berganti cream, night, paper, dan coral/mustard.
-- Reduced motion mematikan grid, stream, sweep, pulse, float, dan parallax.
+- transform CSS dinonaktifkan ketika GSAP aktif;
+- wordmark dan progress tetap terlihat sampai coral wipe hampir penuh;
+- hero disiapkan dalam keadaan paused sebelum loader keluar;
+- hero dimulai ketika coral wipe sudah menutup layar;
+- body memakai state `is-preloading`, `is-loaded`, dan `motion-ready`;
+- failsafe loader maksimal 2,2 detik.
 
-## 5. Scroll Animation
+### Red mask terlalu dominan
 
-- Smooth reveal memakai GSAP; opacity awal tetap 0.35 agar section tidak kosong.
-- Problems memakai stagger dan rotasi kecil.
-- Kenapa Presensigo memakai sticky intro dan active benefit indicator.
-- Cara Kerja memakai `pin: true`, `scrub: 1`, horizontal translate, active step,
-  dan progress bar pada desktop.
-- Paket memakai sticky intro, reveal per card, dan highlight Standard 1.03.
-- Galeri memakai contained horizontal scroll-snap, active caption, prev/next,
-  serta GSAP entrance.
-- Mobile menonaktifkan pin dan kembali ke vertical/native flow.
+- Mask tetap menjadi scene opener, lalu turun ke opacity 0,58 pada desktop.
+- Laptop 1024px memakai opacity 0,44 dan bidang yang lebih kecil.
+- Mobile memakai opacity 0,36.
+- Dashboard dan phone tetap berada di atas mask.
 
-## 6. QR dan Dashboard Animation
+### Scroll, workflow, gallery, dan transition
 
-- State QR: `Memindai QR...`, `Memvalidasi GPS...`, `Absensi Berhasil`.
-- Scan line, detection corner, GPS validation glow, dan success glow aktif.
-- Success menampilkan checkmark, label `Data masuk`, dan highlight row.
-- Counter bergerak dari nol menuju 86, 9, dan 5.
-- Chart SVG digambar satu kali.
-- Dashboard floating dimulai setelah intro selesai.
-- Reduced motion langsung menampilkan success, counter final, dan chart final.
+- Lenis memberi wheel inertia yang lebih halus.
+- Workflow dan gallery memakai perhitungan center-to-center.
+- Active item berada di pusat viewport pada awal, tengah, dan akhir scene.
+- Packages ke Gallery mendapat geometric dark reveal baru.
+- Caption gallery berisi counter, title, dan deskripsi yang berubah tanpa
+  flicker.
 
-## 7. Paket Layanan
+## 3. Smooth Scroll
 
-- Basic - Sistem Siap Pakai: absensi sederhana tanpa website khusus.
-- Standard - Integrasi Website: menambahkan PRESENSIGO ke website existing dan
-  tetap menjadi paket paling direkomendasikan.
-- Premium - Website + Sistem: website resmi sekaligus sistem absensi.
+Lenis 1.3.23 disimpan lokal di `app/static/vendor/lenis.min.js`.
 
-Fitur Basic disesuaikan dengan scope final dan tidak lagi menganggap CTA
-WhatsApp sebagai fitur produk. Setiap paket memakai pesan WhatsApp khusus yang
-sudah di-encode.
+Integrasi:
 
-## 8. Responsive dan Accessibility
+- `initSmoothScroll()` hanya berjalan pada width minimal 900px;
+- Lenis memanggil `ScrollTrigger.update` pada event scroll;
+- `lenis.raf()` dijalankan melalui `gsap.ticker`;
+- `gsap.ticker.lagSmoothing(0)` menjaga sinkronisasi scrub;
+- navigation ke posisi workflow/gallery memakai Lenis jika tersedia;
+- `ScrollTrigger.refresh()` dijalankan setelah preloader selesai.
 
-- 1440px: hero dua kolom, seluruh product visual berada di first viewport.
-- 1024px: tidak ada overflow; pinned workflow tetap aktif.
-- 768px: layout stack dan pinned workflow dimatikan.
-- 375px: headline dan CTA tidak clipping; body width tepat 375px.
-- Menu mobile memperbarui `aria-expanded`, dapat ditutup dengan Escape, dan
-  mengembalikan fokus ke tombol.
-- FAQ memakai button, `aria-controls`, dan `aria-expanded`.
-- Preloader memakai live status dan screen-reader-only fallback.
-- Visible focus state dipertahankan.
+Konfigurasi utama:
 
-## 9. File yang Diubah
+- duration 1,15;
+- smooth wheel aktif;
+- touch smoothing nonaktif;
+- wheel multiplier 0,9.
 
-- `app/data.py` - scope fitur Basic final.
-- `app/templates/base.html` - preloader, GSAP/ScrollTrigger CDN, dan nav hook.
-- `app/templates/home.html` - hero hooks, data stream, blobs, workflow progress,
-  QR success badge, dan CTA hooks.
-- `app/static/css/styles.css` - loader, ambient layer, pinned/sticky states,
-  responsive geometry, active pricing, dan reduced motion.
-- `app/static/js/site.js` - seluruh init function, GSAP timelines,
-  ScrollTrigger, QR/dashboard state, dan fallback.
-- `tests/test_app.py` - contract test untuk CDN order, hooks, fungsi motion,
-  pin, scrub, dan fallback guard.
-- `docs/asset-analysis.md` - pemakaian Units sebagai referensi motion.
-- `docs/bmc-web-mapping.md` - jalur konversi berbasis storytelling.
-- `docs/website-structure.md` - arsitektur GSAP dan progressive enhancement.
-- `docs/animation-plan.md` - motion plan final.
-- `docs/implementation-report.md` - laporan revisi ini.
-- `docs/superpowers/specs/2026-06-15-presensigo-gsap-scrolltrigger-design.md`
-  - baseline GSAP dan Units-inspired motion.
-- `docs/superpowers/plans/2026-06-15-presensigo-gsap-scrolltrigger.md`
-  - langkah implementasi dan verifikasi.
+Fallback:
 
-## 10. File yang Dibuat
+- jika Lenis gagal dimuat, native scroll tetap berjalan;
+- width di bawah 900px tidak membuat instance Lenis;
+- reduced motion selalu menonaktifkan Lenis.
 
-- `docs/superpowers/specs/2026-06-15-presensigo-gsap-scrolltrigger-design.md`
-  - spesifikasi desain motion.
-- `docs/superpowers/plans/2026-06-15-presensigo-gsap-scrolltrigger.md`
-  - rencana kerja GSAP/ScrollTrigger.
+Sampel inertia setelah wheel 900px:
 
-Tidak ada aset visual pihak ketiga baru yang dimasukkan ke produksi.
+- 20ms: 219px;
+- 120ms: 517px;
+- 300ms: 723px;
+- 700ms: 804px.
 
-## 11. Testing
+## 4. Loading dan Hero
 
-- Pytest: `16 passed`, satu warning deprecation internal Starlette TestClient.
-- Route: `/`, `/tentang`, `/layanan`, `/galeri`, `/testimoni`, `/faq`, dan
-  `/kontak` berhasil serta menghasilkan konten bermakna.
-- Endpoint: `/health`, `/api/health`, `/contact`, dan `/api/contact` lulus.
-- CTA: WhatsApp utama, email, Basic, Standard, dan Premium tervalidasi.
-- Browser: Chrome melalui Playwright CLI.
-- Console: nol error, nol warning, dan nol page error pada tujuh route.
-- Workflow: pin ditemukan, `scrub: 1`, progress 0.54, translate horizontal
-  `-558.93px`, step aktif `Data Masuk Otomatis`.
-- Galeri: caption berubah dari Dashboard ke QR Scanner setelah tombol next.
-- FAQ: `aria-expanded` dan tinggi jawaban berubah.
-- Reduced motion: loader 284ms, nol ScrollTrigger, QR success, counter final,
-  chart offset nol, dan tidak ada hidden reveal.
-- Fallback CDN: GSAP/ScrollTrigger disimulasikan tidak tersedia; loader selesai,
-  hero visible, IntersectionObserver reveal aktif, dan tidak ada exception.
-- Overflow: body sama dengan viewport pada 1440, 1024, 768, dan 375px.
+Preloader tetap near-black dengan:
 
-## 12. Catatan/Kendala
+- wordmark PRESENSIGO;
+- QR/GPS mini;
+- status text;
+- percentage;
+- thin coral progress line;
+- coral full-panel exit.
 
-- In-app Browser tidak tersedia pada sesi ini, sehingga QA memakai Playwright
-  CLI sebagai fallback.
-- GSAP enhanced path membutuhkan akses CDN. Website tetap berfungsi tanpa CDN.
-- Logo resmi, screenshot produk resmi, harga nominal, testimoni berizin, dan
-  data klien masih belum tersedia.
-- Mockup produk tetap code-native dan testimoni tetap placeholder transparan.
-- Warning pytest berasal dari kompatibilitas Starlette TestClient/httpx dan
-  tidak memengaruhi runtime FastAPI.
+Durasi terukur:
 
-## 13. Ringkasan untuk ChatGPT
+- 1440px: 1786ms;
+- 1024px: 1513ms;
+- 768px: 1520ms;
+- 375px: 1498ms;
+- reduced motion: 274ms.
 
-PRESENSIGO kini memakai loader validasi QR/GPS, hero GSAP, moving data
-background, pinned horizontal workflow, sticky benefit/pricing, product
-showcase, QR success update, counter, dan chart draw. Motion terinspirasi pola
-pengalaman Units.gr tanpa menyalin identitasnya. Seluruh route dan endpoint
-tetap berjalan, fallback tanpa GSAP aman, reduced motion menampilkan state
-statis lengkap, mobile bebas overflow, console nol error, dan pytest lulus
-16 test.
+Hero:
+
+- timeline dibuat paused sebelum loader keluar;
+- headline reveal tetap smooth tanpa bounce;
+- dashboard dan phone masuk setelah typography;
+- dashboard scroll scale berakhir pada 0,97;
+- mask menjadi background plane setelah intro;
+- dashboard opacity final 1 dan tidak tertutup mask;
+- tidak ada body opacity 0 atau frame kosong.
+
+## 5. Scene Transition
+
+- Hero ke Problems: coral diagonal wipe dan heading reveal.
+- Problems ke Why: dark curtain menuju near-black panel.
+- Why ke Cara Kerja: coral/blue data line.
+- Packages ke Gallery: geometric near-black panel reveal.
+- FAQ ke CTA: coral geometric wipe dan CTA typography reveal.
+
+Semua transition memakai satu shape besar dengan scrub linear. Wave, blob,
+particle field, dan decorative sweep tidak dikembalikan.
+
+## 6. Scroll Storytelling
+
+### Pinned workflow
+
+- Aktif mulai 900px.
+- Card pertama, tengah, dan terakhir dipusatkan berdasarkan center geometry.
+- Progress 50% mengaktifkan `Data Masuk Otomatis`.
+- Selisih pusat pada progress 50%: 0,07px.
+- Selisih pusat card pertama/terakhir: 0,07px.
+- Nonaktif opacity 0,44 dan scale 0,955.
+- Active card opacity 1, scale 1, dan border coral.
+- End distance dihitung dari jarak pusat first-to-last, sehingga tidak ada
+  blank tail.
+
+### Sticky benefit
+
+- Intro tetap sticky pada desktop.
+- Watermark `PRESENSIGO` ditambahkan dengan opacity sangat rendah.
+- Card aktif memakai border coral dan background dark yang bersih.
+- Tidak ada neon glow besar.
+
+### Sticky pricing
+
+- Basic tetap paper.
+- Standard tetap coral dan menjadi active card utama.
+- Standard terukur memakai `scale: 1.025`.
+- Premium tetap dark dengan geometri blue outline, bukan radial glow.
+- Comparison strip tetap menampilkan tiga model implementasi.
+
+### Product showcase
+
+- Aktif mulai 900px.
+- Progress 50% mengaktifkan `Validasi GPS`.
+- Selisih pusat pada progress 50%: 0,53px.
+- Selisih pusat awal: 0,09px; akhir: 0,16px.
+- Counter, title, dan description berganti melalui short crossfade.
+- Mobile tetap memakai contained horizontal scroll-snap.
+
+## 7. Visual Simplification
+
+Tetap dihapus atau dikurangi:
+
+- custom cursor;
+- hero particle field;
+- ambient glow besar;
+- wave divider;
+- repeated scan sweep;
+- floating dashboard loop;
+- elastic, back, dan bounce easing;
+- radial glow pada Premium pricing card.
+
+Motion utama memakai `power3.out`, `expo.out`, atau `none` untuk scrub.
+
+## 8. QR dan Dashboard Animation
+
+QR loop tetap memiliki:
+
+1. `Memindai QR...`
+2. `Memvalidasi GPS...`
+3. `Absensi Berhasil`
+
+Success state tetap:
+
+- mengaktifkan attendance row;
+- mengubah waktu menjadi `Baru`;
+- mengubah label menjadi `GPS valid`;
+- menampilkan badge `Data masuk`.
+
+Dashboard:
+
+- counter selesai pada 86, 9, dan 5;
+- chart selesai pada `stroke-dashoffset: 0`;
+- reduced motion langsung menampilkan QR success dan data final.
+
+## 9. Responsive dan Accessibility
+
+- 1440px: Lenis, pinned workflow, sticky pricing, dan pinned gallery aktif.
+- 1024px: Lenis dan pin tetap aktif; mask diperkecil dan opacity 0,44.
+- 768px: Lenis dan pin nonaktif; layout native stack.
+- 375px: Lenis dan pin nonaktif; mask opacity 0,36; body overflow 0px.
+- Mobile menu mengubah `aria-expanded`, dapat ditutup dengan Escape.
+- FAQ mengubah `aria-expanded` dan tetap keyboard accessible.
+- Reduced motion: loader 274ms, nol ScrollTrigger, QR/counter/chart final.
+- No-GSAP: hero dan dashboard terlihat, pin nonaktif, overflow 0px, tanpa
+  console error.
+
+## 10. File yang Diubah
+
+- `app/templates/base.html` - Lenis local script dan body lifecycle class.
+- `app/templates/home.html` - scene markers, Packages-to-Gallery transition,
+  benefit watermark, dan gallery description data.
+- `app/static/js/site.js` - preloader handoff, paused hero, Lenis integration,
+  scene transition, centered workflow/gallery, caption crossfade, dan fallback.
+- `app/static/css/styles.css` - loader anti-blank, Lenis styles, responsive mask,
+  active states, pricing polish, watermark, dan mobile safeguards.
+- `tests/test_app.py` - contract test untuk Lenis, lifecycle body, scene hooks,
+  centered-track helper, caption, dan local vendor.
+- `docs/implementation-report.md` - laporan final premium motion polish.
+
+`app/main.py` dan `app/data.py` tidak diubah.
+
+## 11. File yang Dibuat
+
+- `app/static/vendor/lenis.min.js` - Lenis 1.3.23 dari paket npm resmi.
+
+## 12. Testing
+
+Commands:
+
+```text
+.\.venv\Scripts\python.exe -m pytest
+node --check app/static/js/site.js
+git diff --check
+```
+
+Hasil:
+
+- Pytest: 16 passed.
+- Warning: satu Starlette TestClient/httpx deprecation warning.
+- JavaScript syntax: pass.
+- Git whitespace check: pass; hanya warning LF ke CRLF.
+- Route `/`, `/tentang`, `/layanan`, `/galeri`, `/testimoni`, `/faq`, dan
+  `/kontak`: HTTP 200, nol console error.
+- `/health` dan `/api/health`: `status=ok`.
+- `/contact` dan `/api/contact`: success true dan WhatsApp URL valid.
+- Browser engine: Microsoft Edge melalui Playwright fallback.
+- Loading: selesai otomatis tanpa frame hitam kosong.
+- Lenis: aktif pada 1440/1024; nonaktif pada 768/375.
+- Workflow: centered start/mid/end dan progress linear.
+- Sticky benefit: active state dan dark panel pass.
+- Sticky pricing: Standard active dan scale 1,025.
+- Gallery: centered start/mid/end, caption, counter, progress pass.
+- QR loop, dashboard update, counter, dan chart: pass.
+- 1440, 1024, 768, 375px: body overflow 0px.
+- Reduced motion: 274ms, nol trigger, final data visible.
+- No-GSAP fallback: visible, usable, nol console error.
+
+## 13. Catatan/Kendala
+
+- In-app Browser tidak tersedia pada sesi ini; QA memakai Playwright dengan
+  Microsoft Edge.
+- Frame video Tresmares dan Private Equity diekstrak melalui Edge dan
+  dibandingkan dengan screenshot implementasi.
+- Screenshot produk resmi, logo resmi, harga nominal, testimoni berizin, dan
+  data klien belum tersedia.
+- Product mockup tetap code-native dan testimoni tetap placeholder.
+- Global Python shell tidak memiliki pytest; test dijalankan melalui project
+  virtual environment.
+- Warning pytest berasal dari deprecation Starlette TestClient/httpx dan tidak
+  memengaruhi runtime.
+
+## 14. Ringkasan untuk ChatGPT
+
+PRESENSIGO sudah mendapat final premium motion polish: blank loader dihapus,
+Lenis 1.3.23 lokal tersinkron dengan GSAP ScrollTrigger, red mask lebih ringan,
+scene transition lebih jelas, workflow dan gallery terpusat tanpa blank tail,
+caption gallery berubah smooth, dan Standard pricing tetap menjadi fokus.
+Semua 7 route serta 4 endpoint lulus, pytest 16/16, console bersih, mobile
+tanpa overflow, reduced motion aman, dan no-GSAP fallback tetap usable.

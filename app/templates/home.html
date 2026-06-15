@@ -1,25 +1,10 @@
 {% extends "base.html" %}
 {% block title %}PRESENSIGO | Absensi Digital Akurat dan Profesional{% endblock %}
 {% block content %}
-<section class="hero hero-premium animated-grid section-ambient scan-sweep" aria-labelledby="hero-title">
+<section class="hero hero-premium big-type scroll-scene" aria-labelledby="hero-title">
   <div class="hero-grid-layer" aria-hidden="true" data-intro="grid"></div>
-  <div class="signal-field" aria-hidden="true">
-    <i class="signal-dot signal-dot-blue js-bg-dot"></i>
-    <i class="signal-dot signal-dot-live js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-1 js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-2 js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-3 js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-4 js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-5 js-bg-dot"></i>
-    <i class="data-particle hero-dot dot-6 js-bg-dot"></i>
-    <i class="bg-signal"></i>
-    <i class="bg-pulse"></i>
-    <i class="floating-shape"></i>
-  </div>
-  <div class="data-stream data-stream-hero" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="ambient-glow js-parallax-blob" aria-hidden="true"></div>
-  <div class="hero-blob hero-blob-mustard js-parallax-blob" aria-hidden="true"></div>
-  <div class="hero-blob hero-blob-coral js-parallax-blob" aria-hidden="true"></div>
+  <div class="red-mask" data-hero-mask aria-hidden="true"></div>
+  <div class="hero-data-line" aria-hidden="true"></div>
   <div class="hero-copy js-hero-copy">
     <h1 class="display display-xl hero-title" id="hero-title">
       <span class="js-hero-line" data-intro="line-1">Transformasi</span>
@@ -111,21 +96,11 @@
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    {% for repeat in range(2) %}
-      <span>SCAN QR &bull; GPS REAL-TIME &bull; LAPORAN OTOMATIS &bull; ANTI-TITIP ABSEN &bull;</span>
-      <span>SCAN QR &bull; GPS REAL-TIME &bull; LAPORAN OTOMATIS &bull; ANTI-TITIP ABSEN &bull;</span>
-    {% endfor %}
-  </div>
+<div class="panel-transition geometric-wipe transition-hero-problems" data-panel-transition data-scene-transition="hero-problems" aria-hidden="true">
+  <span></span>
 </div>
 
-<section class="section-shell problem-section animated-grid section-ambient" id="masalah">
-  <div class="signal-field" aria-hidden="true">
-    <i class="data-particle particle-a"></i>
-    <i class="data-particle particle-b"></i>
-    <i class="bg-signal signal-coral"></i>
-  </div>
+<section class="section-shell problem-section premium-scene" id="masalah">
   <div class="section-heading" data-reveal>
     <span class="section-label">Masalah Operasional</span>
     <h2 class="display display-lg">Masalah Absensi Manual Masih Menghambat Operasional?</h2>
@@ -143,8 +118,12 @@
   <p class="section-closing" data-reveal>Presensigo menyederhanakan proses tersebut melalui sistem absensi digital yang lebih akurat, praktis, dan mudah dipantau.</p>
 </section>
 
-<section class="benefit-section section-ambient" id="kenapa-presensigo">
-  <div class="data-stream data-stream-benefit" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="panel-transition dark-curtain" data-panel-transition data-scene-transition="problems-why" aria-hidden="true">
+  <span></span>
+</div>
+
+<section class="benefit-section dark-panel scroll-scene" id="kenapa-presensigo">
+  <span class="benefit-watermark" aria-hidden="true">PRESENSIGO</span>
   <div class="benefit-intro" data-reveal>
     <span class="section-label">Dampak Bisnis</span>
     <h2 class="display display-lg">Kenapa Harus Presensigo?</h2>
@@ -176,12 +155,11 @@
   </div>
 </section>
 
-<section class="workflow-section section-ambient" id="cara-kerja">
-  <div class="signal-field" aria-hidden="true">
-    <i class="signal-dot signal-dot-live"></i>
-    <i class="bg-signal signal-coral"></i>
-    <i class="data-particle particle-c"></i>
-  </div>
+<div class="panel-transition data-line-wipe" data-panel-transition data-scene-transition="why-workflow" aria-hidden="true">
+  <span></span>
+</div>
+
+<section class="workflow-section dark-panel scroll-scene" id="cara-kerja">
   <div class="section-heading section-heading-light workflow-heading" data-reveal>
     <span class="section-label">Cara Kerja</span>
     <h2 class="display display-lg">Cara Kerja Presensigo</h2>
@@ -196,7 +174,7 @@
       {% endfor %}
     </div>
     <div class="workflow-viewport" data-reveal>
-      <div class="workflow-track" data-workflow-track>
+      <div class="workflow-track horizontal-track" data-workflow-track>
         {% for item in workflow %}
         <article class="workflow-card workflow-{{ item.slug }} {{ 'is-active' if loop.first else '' }}" data-workflow-card data-index="{{ loop.index0 }}">
           <div class="workflow-visual" aria-hidden="true">
@@ -220,8 +198,7 @@
   </div>
 </section>
 
-<section class="section-shell feature-section section-ambient scan-sweep" id="fitur">
-  <div class="data-stream data-stream-feature" aria-hidden="true"><i></i><i></i><i></i></div>
+<section class="section-shell feature-section premium-scene" id="fitur">
   <div class="section-heading" data-reveal>
     <span class="section-label">Fitur Utama</span>
     <h2 class="display display-lg">Fitur yang Membuat Absensi Lebih Terkontrol</h2>
@@ -244,11 +221,7 @@
   </div>
 </section>
 
-<section class="section-shell pricing-section animated-grid section-ambient" id="paket">
-  <div class="signal-field" aria-hidden="true">
-    <i class="bg-pulse pulse-pricing"></i>
-    <i class="floating-shape shape-pricing"></i>
-  </div>
+<section class="section-shell pricing-section premium-scene" id="paket">
   <div class="section-heading pricing-section-heading" data-reveal>
     <span class="section-label">Tiga Cara Implementasi</span>
     <h2 class="display display-lg">Pilih Model yang Paling Cocok untuk Organisasi Anda</h2>
@@ -263,7 +236,7 @@
     </article>
     {% endfor %}
   </div>
-  <div class="pricing-layout">
+  <div class="pricing-layout pricing-sticky">
     <aside class="pricing-intro" data-reveal>
       <span class="section-label">Paket Layanan</span>
       <h2 class="display display-md">Pilih Cara Implementasi Presensigo</h2>
@@ -299,30 +272,41 @@
   </div>
 </section>
 
-<section class="gallery-home section-ambient" id="galeri">
+<div class="panel-transition geometric-wipe transition-packages-gallery" data-panel-transition data-scene-transition="packages-gallery" aria-hidden="true">
+  <span></span>
+</div>
+
+<section class="gallery-home dark-panel scroll-scene" id="galeri">
   <div class="section-heading section-heading-light" data-reveal>
     <span class="section-label">Tampilan Sistem</span>
     <h2 class="display display-lg">Praktis untuk Admin. Jelas untuk Manajemen.</h2>
     <p class="lead">Alur yang mudah dipahami tanpa mengorbankan detail operasional.</p>
   </div>
   <div class="gallery-showcase-toolbar" data-reveal>
-    <div><span data-gallery-count>01 / 05</span><strong data-gallery-status>Dashboard Monitoring</strong></div>
+    <div>
+      <span data-gallery-count>01 / 05</span>
+      <strong data-gallery-status>Dashboard Monitoring</strong>
+      <p data-gallery-description>Monitoring kehadiran real-time</p>
+    </div>
     <div class="gallery-controls">
       <button type="button" aria-label="Tampilan sebelumnya" data-gallery-prev>&larr;</button>
       <button type="button" aria-label="Tampilan berikutnya" data-gallery-next>&rarr;</button>
     </div>
   </div>
   <div class="gallery-showcase-viewport" data-reveal>
-    <div class="gallery-showcase-track" data-gallery-track>
-    <article class="gallery-slide gallery-dashboard is-active" data-gallery-card data-title="Dashboard Monitoring" data-index="0">
+    <div class="gallery-showcase-track showcase-track horizontal-track" data-gallery-track>
+    <article class="gallery-slide gallery-dashboard is-active" data-gallery-card data-title="Dashboard Monitoring" data-description="Monitoring kehadiran real-time" data-index="0">
       <div class="gallery-caption"><span>01 / Dashboard</span><strong>Monitoring kehadiran real-time</strong></div>
       <div class="report-ui"><div><span>Nama</span><span>Status</span><span>Waktu</span></div><div><span>Aulia Rahman</span><span>Hadir</span><span>07:31</span></div><div><span>Sinta Maharani</span><span>Terlambat</span><span>07:44</span></div><div><span>Fajar Nugraha</span><span>Izin</span><span>-</span></div></div>
     </article>
-    <article class="gallery-slide gallery-scan" data-gallery-card data-title="QR Scanner Mobile" data-index="1"><div class="gallery-caption"><span>02 / Mobile</span><strong>Scan QR lebih cepat</strong></div><div class="scanner-ui"><div class="qr-frame" aria-hidden="true">{% for item in range(25) %}<i></i>{% endfor %}</div><div class="scan-line"></div></div></article>
-    <article class="gallery-slide gallery-location" data-gallery-card data-title="Validasi GPS" data-index="2"><div class="gallery-caption"><span>03 / GPS</span><strong>Lokasi tervalidasi</strong></div><div class="map-ui"><div class="map-pin"></div></div></article>
-    <article class="gallery-slide gallery-report" data-gallery-card data-title="Laporan Otomatis" data-index="3"><div class="gallery-caption"><span>04 / Report</span><strong>Rekap siap digunakan</strong></div><div class="report-ui"><div><span>Periode</span><span>Status</span><span>Data</span></div><div><span>Hari ini</span><span>Aktif</span><span>257</span></div><div><span>Minggu ini</span><span>Final</span><span>1.284</span></div><div><span>Bulan ini</span><span>Proses</span><span>4.976</span></div></div></article>
-    <article class="gallery-slide gallery-admin" data-gallery-card data-title="Admin Control Panel" data-index="4"><div class="gallery-caption"><span>05 / Admin</span><strong>Konfigurasi terpusat</strong></div><div class="admin-panel-ui"><span>Jadwal & Shift</span><span>Radius Lokasi</span><span>Pengguna</span><span>Format Laporan</span></div></article>
+    <article class="gallery-slide gallery-scan" data-gallery-card data-title="QR Scanner Mobile" data-description="Scan QR lebih cepat dari perangkat peserta" data-index="1"><div class="gallery-caption"><span>02 / Mobile</span><strong>Scan QR lebih cepat</strong></div><div class="scanner-ui"><div class="qr-frame" aria-hidden="true">{% for item in range(25) %}<i></i>{% endfor %}</div><div class="scan-line"></div></div></article>
+    <article class="gallery-slide gallery-location" data-gallery-card data-title="Validasi GPS" data-description="Validasi radius lokasi sebelum kehadiran disimpan" data-index="2"><div class="gallery-caption"><span>03 / GPS</span><strong>Lokasi tervalidasi</strong></div><div class="map-ui"><div class="map-pin"></div></div></article>
+    <article class="gallery-slide gallery-report" data-gallery-card data-title="Laporan Otomatis" data-description="Rekap operasional siap dipakai untuk evaluasi" data-index="3"><div class="gallery-caption"><span>04 / Report</span><strong>Rekap siap digunakan</strong></div><div class="report-ui"><div><span>Periode</span><span>Status</span><span>Data</span></div><div><span>Hari ini</span><span>Aktif</span><span>257</span></div><div><span>Minggu ini</span><span>Final</span><span>1.284</span></div><div><span>Bulan ini</span><span>Proses</span><span>4.976</span></div></div></article>
+    <article class="gallery-slide gallery-admin" data-gallery-card data-title="Admin Control Panel" data-description="Konfigurasi jadwal, lokasi, pengguna, dan laporan terpusat" data-index="4"><div class="gallery-caption"><span>05 / Admin</span><strong>Konfigurasi terpusat</strong></div><div class="admin-panel-ui"><span>Jadwal & Shift</span><span>Radius Lokasi</span><span>Pengguna</span><span>Format Laporan</span></div></article>
     </div>
+  </div>
+  <div class="gallery-scroll-progress" aria-hidden="true">
+    <span data-gallery-progress-bar></span>
   </div>
   <a class="gallery-link button-secondary button-arrow" href="/galeri"><span>Lihat Galeri Lengkap</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </section>
@@ -364,12 +348,12 @@
   </div>
 </section>
 
-<section class="contact-cta section-ambient signal-wave" id="konsultasi">
-  <div class="signal-field" aria-hidden="true">
-    <i class="bg-pulse pulse-contact"></i>
-    <i class="signal-dot signal-dot-blue"></i>
-    <i class="bg-signal signal-contact"></i>
-  </div>
+<div class="panel-transition geometric-wipe transition-final-cta" data-panel-transition data-scene-transition="faq-cta" aria-hidden="true">
+  <span></span>
+</div>
+
+<section class="contact-cta premium-cta scroll-scene" id="konsultasi">
+  <div class="cta-signal-line" aria-hidden="true"></div>
   <div class="contact-cta-copy js-cta-copy" data-reveal>
     <span class="section-label">Mulai Konsultasi</span>
     <h2 class="display display-lg">Siap Transformasi Sistem Absensi Anda?</h2>

@@ -28,11 +28,11 @@ Canvas tidak ditampilkan mentah pada halaman publik.
 
 ## Jalur Konversi
 
-1. Loader singkat membangun konteks bahwa sistem sedang memvalidasi QR, GPS,
-   dan dashboard tanpa memperlambat akses.
+1. Loader singkat membangun konteks validasi QR, GPS, dan dashboard dalam
+   sekitar 1,7 detik tanpa memperlambat akses.
 2. Pengunjung mengenali masalah pada hero dan bagian masalah.
-3. Manfaat bisnis dan pinned workflow menjelaskan hasil serta alur produk.
-4. Fitur, product showcase, dan paket menurunkan ketidakpastian.
+3. Dark benefit panel dan pinned workflow menjelaskan hasil serta alur produk.
+4. Fitur, sticky pricing, dan pinned product showcase menurunkan ketidakpastian.
 5. FAQ menjawab hambatan umum.
 6. CTA mengarahkan ke WhatsApp, email, atau form konsultasi.
 

@@ -9,16 +9,16 @@
   <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ url_for('static', path='css/tailwind.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="{{ url_for('static', path='vendor/gsap.min.js') }}"></script>
+  <script defer src="{{ url_for('static', path='vendor/ScrollTrigger.min.js') }}"></script>
+  <script defer src="{{ url_for('static', path='vendor/lenis.min.js') }}"></script>
   <script defer src="{{ url_for('static', path='js/site.js') }}"></script>
 </head>
-<body class="antialiased">
+<body class="antialiased is-preloading">
   <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Menyiapkan website PRESENSIGO">
-    <div class="preloader__grid" aria-hidden="true"></div>
+    <div class="preloader__wipe" aria-hidden="true"></div>
     <div class="preloader__inner">
       <div class="preloader__logo">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <strong>PRESENSIGO</strong>
       </div>
       <div class="preloader__visual" aria-hidden="true">
@@ -27,17 +27,16 @@
           <i></i>
         </div>
         <div class="preloader__gps"><i></i></div>
-        <div class="preloader__dots"><i></i><i></i><i></i></div>
       </div>
       <div class="preloader__meta">
-        <span class="preloader__status" data-preloader-status>Menyiapkan Sistem...</span>
+        <span class="preloader__status" data-preloader-status>Menyiapkan sistem</span>
         <span class="preloader__percent" data-preloader-percent>0%</span>
       </div>
       <div class="preloader__progress" aria-hidden="true">
         <span class="preloader__progress-bar" data-preloader-progress></span>
       </div>
       <span class="sr-only">
-        Menyiapkan Sistem... Memuat Dashboard... Mengaktifkan QR + GPS... Siap Digunakan
+        Menyiapkan sistem. Memuat dashboard. Validasi QR + GPS. Siap digunakan.
       </span>
     </div>
   </div>

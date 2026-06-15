@@ -17,8 +17,9 @@
 | Mira / Webflow | Ratusan PNG, WebP, AVIF, SVG, cuplikan UI, media proof, pricing, dan foto editorial | Struktur landing page SaaS, product storytelling, pricing, dan framing dashboard | Referensi visual |
 | Crav Burgers | Sekitar 30 gambar, struktur HTML, token gaya, dan vektor | Krem-koral, headline besar, outline hitam, kartu ekspresif, dan ritme brutalist | Referensi utama; gambar makanan ditolak |
 | Enerblock | Sekitar 15 foto teknis, struktur HTML, token gaya, dan vektor | Grid B2B, label teknis, komposisi proyek, dan framing dokumentasi | Referensi visual; foto konstruksi ditolak |
-| Units | Foto interior/komunitas, ikon fasilitas SVG, galeri, struktur, token gaya, serta pengalaman loading dan scroll pada `units.gr/en/homepage/` | Loader fullscreen, entrance bertahap, scene transition, pinned storytelling, parallax, dan horizontal movement | Referensi motion utama; identitas, warna, aset, dan foto properti ditolak |
-| Tresmares Capital | Struktur HTML, token gaya, gambar, dan vektor | Tipografi editorial premium, whitespace, dan komposisi korporat | Referensi visual |
+| Units | Foto interior/komunitas, ikon fasilitas SVG, galeri, struktur, dan token gaya | Referensi awal untuk loading dan horizontal storytelling | Referensi sekunder; motion playful tidak diteruskan |
+| Tresmares Capital | Struktur HTML, token gaya, gambar, vektor, dan video scroll terbaru | Tipografi editorial premium, whitespace, section pacing, dan komposisi korporat | Referensi motion dan visual utama |
+| Tresmares Private Equity | Video scroll terbaru | Red geometric planes, white/dark contrast, large typography, dan controlled scene transition | Referensi motion dan visual utama |
 | ApeChain | Struktur HTML dan token gaya teknologi | Dashboard gelap, outline, aksen biru elektrik, dan kesan real-time | Referensi utama |
 | Outfit / hellohello.is | 32 aset gambar, struktur HTML, token gaya, dan vektor | Latar `rgb(237,228,221)`, aksen merah, dan editorial type treatment | Referensi warna dan tipografi |
 | Neue Montreal | 17 aset WebP, struktur HTML, token gaya, dan vektor | Bidang gelap, tipografi grotesk, selection coral `#FF4000` | Referensi tipografi dan kontras |
@@ -35,8 +36,8 @@
 - SVG inline yang dibuat khusus untuk QR, GPS, laporan, dashboard, dan status.
 - Mockup dashboard, QR scanner, peta, tabel laporan, dan chart yang dibangun
   dengan HTML, CSS, dan SVG lokal.
-- Grid bergerak, signal particles, pulse ring, scan sweep, glow, dan signal
-  wave yang dibuat sepenuhnya dengan CSS.
+- Coral geometric mask, dashboard, QR scanner, progress line, dan panel
+  transition yang dibuat sepenuhnya dengan HTML/CSS/SVG lokal.
 - Tidak ada foto atau logo pihak ketiga dari Drive yang ditampilkan di website.
 
 ### Digunakan sebagai Referensi
@@ -46,9 +47,9 @@
 - Grid teknis dari Enerblock.
 - Tipografi editorial dan whitespace dari Tresmares, Neue Montreal, dan Loft
   Thirty One.
-- Ritme galeri dan bidang warna dari Units.
-- Pengalaman loader, pinned scroll, horizontal storytelling, dan transisi
-  antar-scene dari Units.gr diterjemahkan ulang dengan identitas PRESENSIGO.
+- Ritme pinned scroll dan horizontal storytelling dari video Tresmares.
+- Red geometric block, dark/white contrast, whitespace, dan big typography dari
+  video Private Equity.
 - Status, badge, dan framing produk digital dari Wero.
 
 ### Ditolak sebagai Konten Live
@@ -92,12 +93,12 @@ diperlukan untuk revisi animasi.
 - Body/UI: Segoe UI/Arial
 - Border: tegas dengan offset shadow terkontrol
 - Motion: GSAP/ScrollTrigger untuk sequence dan storytelling; CSS keyframes
-  untuk QR, signal, grid, sweep, dan micro-interaction
+  hanya untuk QR scan, live pulse, small data pulse, dan micro-interaction
 
-Units.gr hanya digunakan untuk mempelajari tempo dan struktur pengalaman.
-Tidak ada warna, gambar, layout spesifik, logo, copy, atau identitas Units yang
-disalin ke implementasi. Seluruh visual live tetap code-native dan memakai
-palet Premium Brutalist PRESENSIGO.
+Video Tresmares dan Private Equity hanya digunakan untuk mempelajari tempo,
+whitespace, geometric transition, typographic scale, dan pinned storytelling.
+Tidak ada logo, copy, foto, atau identitas referensi yang disalin. Seluruh
+visual live tetap code-native dan memakai palet Premium Brutalist PRESENSIGO.
 
 ## Kekurangan Aset
 
